@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scripts/Main.gd" type="Script" id=1]
+[ext_resource path="res://scripts/ObjectPool.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/Background.png" type="Texture" id=3]
+[ext_resource path="res://scripts/Background.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Penguin.gd" type="Script" id=5]
+[ext_resource path="res://assets/sprites/Penguin.png" type="Texture" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Flap"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 76.312, 35.0832 )
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="CharacterPool" type="Node2D" parent="."]
+position = Vector2( 1375.5, 802.409 )
+script = ExtResource( 2 )
+g_path = "res://scenes/characters/"
+
+[node name="Background1" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+centered = false
+script = ExtResource( 4 )
+
+[node name="Background2" type="Sprite" parent="."]
+position = Vector2( 1600, 0 )
+texture = ExtResource( 3 )
+centered = false
+script = ExtResource( 4 )
+
+[node name="Penguin" type="RigidBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 257.948, 170.092 )
+mass = 0.102041
+gravity_scale = 10.0
+contacts_reported = 5
+contact_monitor = true
+can_sleep = false
+script = ExtResource( 5 )
+
+[node name="PenguinSprite" type="Sprite" parent="Penguin"]
+texture = ExtResource( 6 )
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Penguin/PenguinSprite"]
+anims/Flap = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Penguin"]
+position = Vector2( 0, 3 )
+shape = SubResource( 2 )
+[connection signal="body_entered" from="Penguin" to="Penguin" method="_on_PenguinRigidBody_body_entered"]
