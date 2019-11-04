@@ -6,19 +6,31 @@ export var g_path = ""
 export var g_min_y = 860
 export var g_max_y = 860
 export var g_starting_x = 1700
-export var g_copies_of_each = 3
+export var g_copies_of_each = 2
+export var disabled = false
+export var g_min_spawn_wait_ms = 1000
+export var g_max_spawn_wait_ms = 2000
+export var g_object_velocity = 5
 
-var g_min_spawn_wait_ms = 500
-var g_max_spawn_wait_ms = 1500
 var g_rand_spawn_wait_ms = 0
 var g_last_spawn_time_ms = 0
 var g_object_pool = []
 var g_object_pool_available = []
-var g_max_available_objects = null
+var g_max_available_objects = 0
+
+func use_params(params):
+	g_min_spawn_wait_ms = params.min_spawn_wait_ms
+	g_max_spawn_wait_ms = params.max_spawn_wait_ms
+	g_object_velocity = params.object_velocity
+	disabled = params.disabled
+	# Update speed of objects that are currently on screen
+	for object in g_object_pool:
+		var x = object.global_position.x
+		#if x > LEFT_BOUND and x < g_starting_x:
+			#object.update_velocity(g_object_velocity)
 
 func _ready():
 	var files = _list_files_in_directory(g_path)
-	print(files)
 	for file in files:
 		var full_path = g_path + file
 		
@@ -49,12 +61,14 @@ func _list_files_in_directory(path):
 	return files
 
 func _process(delta):
+	if disabled:
+		return
 	var time_diff = OS.get_system_time_msecs() - g_last_spawn_time_ms
 	if time_diff > g_rand_spawn_wait_ms:
 		var available_object = _find_and_remove_available_object()
 		if available_object:
 			available_object.global_position = _get_random_global_position(available_object)
-			available_object.start()
+			available_object.start(g_object_velocity)
 			g_last_spawn_time_ms = OS.get_system_time_msecs()
 			g_rand_spawn_wait_ms = rand_range(g_min_spawn_wait_ms, g_max_spawn_wait_ms)
 	_add_to_available_objects()

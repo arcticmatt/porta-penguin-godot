@@ -1,16 +1,34 @@
 extends Node2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+# Prevent undesirable behavior when spamming
+const DISABLE_INPUT_MSECS = 1000
+const SHOW_RESTART_DELAY_MSECS = 750
 
-# Called when the node enters the scene tree for the first time.
+var g_game_over = false
+var g_game_over_msecs = null
+
 func _ready():
 	# Top
 	_add_wall(Vector2(0, -10), Vector2(1600, 10))
 	# Bottom, covers grass
 	_add_wall(Vector2(0, 900), Vector2(1600, 70))
-	pass # Replace with function body.
+	$Penguin.connect("signal_penguin_dead", self, "game_over")
+	get_tree().paused = true
+	g_game_over_msecs = null
+	_update_for_current_level()
+	
+func _process(delta):
+	if g_game_over_msecs and OS.get_system_time_msecs() - g_game_over_msecs > SHOW_RESTART_DELAY_MSECS:
+		$CenterContainer/VBoxContainer/HBoxContainer/RestartLabel.visible = true
+		$CenterContainer/VBoxContainer/HBoxContainer/DummyLabel.visible = false
+	
+func _input(event):
+	if g_game_over_msecs and OS.get_system_time_msecs() - g_game_over_msecs < DISABLE_INPUT_MSECS:
+		return
+	if event is InputEventMouseButton and g_game_over:
+		get_tree().reload_current_scene()
+	else:
+		$ControlsContainer.visible = false
 
 func _add_wall(position, size):
 	var rect = RectangleShape2D.new()
@@ -23,9 +41,29 @@ func _add_wall(position, size):
 	var collision_object = StaticBody2D.new()
 	collision_object.position = position
 	collision_object.add_child(collision_shape)
+	collision_object.collision_layer = 0
+	collision_object.set_collision_layer_bit(0, true)
+	collision_object.collision_mask = 0
 	
 	add_child(collision_object)
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func game_over(game_over_text):
+	if g_game_over:
+		return
+	g_game_over_msecs = OS.get_system_time_msecs()
+	$CenterContainer.visible = true
+	$CenterContainer/VBoxContainer/DeathLabel.text = game_over_text
+	g_game_over = true
+	$Penguin.penguin_game_over()
+	Save.save_highscore($ScoreLabel.g_score)
+	Levels.reset_current_level()
+
+func score():
+	$ScoreLabel.increment_score()
+	if Levels.advance_level_if_valid($ScoreLabel.g_score):
+		_update_for_current_level()
+
+func _update_for_current_level():
+	$CharacterPool.use_params(Levels.get_current_character_pool_params())
+	$SucculentPool.use_params(Levels.get_current_succulent_pool_params())
+	$PowerPool.use_params(Levels.get_current_power_pool_params())

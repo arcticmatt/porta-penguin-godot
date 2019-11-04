@@ -19,6 +19,12 @@ config/name="poop-game-godot"
 run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Constants="*res://scripts/Constants.gd"
+Save="*res://scripts/Save.gd"
+Levels="*res://scripts/Levels.gd"
+
 [display]
 
 window/size/width=1600
@@ -50,6 +56,27 @@ texture={
 "stream": false,
 "svg/scale": 1.0
 }
+
+[input]
+
+ui_click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[layer_names]
+
+2d_physics/layer_1="Walls"
+2d_physics/layer_2="Penguin"
+2d_physics/layer_3="Characters"
+2d_physics/layer_4="Poop"
+2d_physics/layer_5="Cacti"
+2d_physics/layer_6="Powers"
 
 [rendering]
 

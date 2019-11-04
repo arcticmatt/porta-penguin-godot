@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/Succulent.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/Succulent2.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Rotate"
+length = 3.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="Succulent2" type="StaticBody2D"]
+scale = Vector2( 1.25, 1.25 )
+collision_layer = 16
+collision_mask = 10
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Rotate"
+anims/Rotate = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 16.323, -35.179, 15.9955, 48.9694, -16.4196, 48.9694, -16.747, -35.5064, -7.90654, -42.3824, 0.606522, -48.9309, 6.82761, -40.7453 )

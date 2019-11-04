@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/Character.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/characters/Character1.png" type="Texture" id=2]
@@ -19,11 +19,12 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 39.7882, 49.8732 )
-
-[node name="GenericCharacter1" type="KinematicBody2D"]
+[node name="GenericCharacter1" type="StaticBody2D"]
+scale = Vector2( 1.5, 1.5 )
+collision_layer = 4
+collision_mask = 8
 script = ExtResource( 1 )
+g_is_generic = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -34,6 +35,14 @@ autoplay = "Walk"
 playback_speed = 2.0
 anims/Walk = SubResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 98.3201, 86.3782 )
-shape = SubResource( 2 )
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="Collision0" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2( 111.572, 2.28189 )
+polygon = PoolVector2Array( -88, -41.9, -71, -25.9, -71, -24, -69.2, -24, -66, -20.8, -66, 7, -68.1, 7, -79.1, 19, -83.5, 19, -71, 29, -71, 42, -73.1, 42, -79.1, 49, -86, 49, -86, 55.8, -89.2, 59, -92.8, 59, -102.1, 60, -104, 60, -104, 58.4, -109, 56.4, -109, 54, -111, 54, -111, 56.1, -117.4, 60, -127.3, 60, -132, 58.4, -132, 56.4, -133.6, 49, -141.4, 49, -143.4, 44, -145.8, 44, -149, 40.8, -149, 29.1, -137.3, 19, -141, 19, -148, 9, -150.8, 9, -154, 5.8, -154, -22, -151.8, -22, -132, -41.8, -132, -44, -88, -44 )
+
+[node name="Collision0" type="CollisionPolygon2D" parent="."]
+position = Vector2( 111.572, 2.28189 )
+polygon = PoolVector2Array( -88, -41.9, -71, -25.9, -71, -24, -69.2, -24, -66, -20.8, -66, 7, -68.1, 7, -79.1, 19, -83.5, 19, -71, 29, -71, 42, -73.1, 42, -79.1, 49, -86, 49, -86, 55.8, -89.2, 59, -92.8, 59, -102.1, 60, -104, 60, -104, 58.4, -109, 56.4, -109, 54, -111, 54, -111, 56.1, -117.4, 60, -127.3, 60, -132, 58.4, -132, 56.4, -133.6, 49, -141.4, 49, -143.4, 44, -145.8, 44, -149, 40.8, -149, 29.1, -137.3, 19, -141, 19, -148, 9, -150.8, 9, -154, 5.8, -154, -22, -151.8, -22, -132, -41.8, -132, -44, -88, -44 )

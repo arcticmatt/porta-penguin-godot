@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/Poop.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/Poop.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 22.5368, 4.4455 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 13.455, 4.49131 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4.54, 4.52559 )
+
+[node name="Poop" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 4
+mass = 50.0
+gravity_scale = 10.0
+contacts_reported = 3
+contact_monitor = true
+can_sleep = false
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="BottomCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 0.0102463, 8.98926 )
+shape = SubResource( 1 )
+
+[node name="MiddleCollision" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="TopCollision" type="CollisionShape2D" parent="."]
+position = Vector2( -0.0571499, -8.91499 )
+shape = SubResource( 3 )
+[connection signal="body_entered" from="." to="." method="_on_Poop_body_entered"]

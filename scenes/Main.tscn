@@ -1,67 +1,235 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
-[ext_resource path="res://scripts/ObjectPool.gd" type="Script" id=2]
-[ext_resource path="res://assets/sprites/Background.png" type="Texture" id=3]
-[ext_resource path="res://scripts/Background.gd" type="Script" id=4]
-[ext_resource path="res://scripts/Penguin.gd" type="Script" id=5]
-[ext_resource path="res://assets/sprites/Penguin.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/Background.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Background.gd" type="Script" id=3]
+[ext_resource path="res://assets/fonts/Main.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/fonts/Pixeled.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://scripts/ObjectPool.gd" type="Script" id=6]
+[ext_resource path="res://scenes/Penguin.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/transparent.png" type="Texture" id=8]
+[ext_resource path="res://scripts/Score.gd" type="Script" id=9]
+[ext_resource path="res://scripts/Pauser.gd" type="Script" id=10]
+[ext_resource path="res://scripts/ControlsContainer.gd" type="Script" id=11]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Flap"
+[sub_resource type="DynamicFont" id=1]
+size = 50
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Blink"
+loop = true
+step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath(".:text")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 1, 0 ]
+"values": [ "tap to restart", "tap to restart.", "tap to restart..", "tap to restart..." ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 76.312, 35.0832 )
+[sub_resource type="DynamicFont" id=3]
+size = 60
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "Blink"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="DynamicFont" id=5]
+size = 60
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "Blink"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="CharacterPool" type="Node2D" parent="."]
-position = Vector2( 1375.5, 802.409 )
-script = ExtResource( 2 )
-g_path = "res://scenes/characters/"
-
 [node name="Background1" type="Sprite" parent="."]
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 centered = false
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 
 [node name="Background2" type="Sprite" parent="."]
 position = Vector2( 1600, 0 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 centered = false
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 
-[node name="Penguin" type="RigidBody2D" parent="."]
-editor/display_folded = true
-position = Vector2( 257.948, 170.092 )
-mass = 0.102041
-gravity_scale = 10.0
-contacts_reported = 5
-contact_monitor = true
-can_sleep = false
-script = ExtResource( 5 )
+[node name="CenterContainer" type="CenterContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1600.0
+margin_bottom = 900.0
 
-[node name="PenguinSprite" type="Sprite" parent="Penguin"]
-texture = ExtResource( 6 )
-hframes = 3
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_top = 248.0
+margin_right = 1600.0
+margin_bottom = 652.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Penguin/PenguinSprite"]
-anims/Flap = SubResource( 1 )
+[node name="DeathLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 1600.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 1600, 200 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "watch who you poop on!"
+align = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Penguin"]
-position = Vector2( 0, 3 )
-shape = SubResource( 2 )
-[connection signal="body_entered" from="Penguin" to="Penguin" method="_on_PenguinRigidBody_body_entered"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 204.0
+margin_right = 1600.0
+margin_bottom = 404.0
+
+[node name="RestartLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+visible = false
+margin_right = 1600.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 850, 200 )
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "tap to restart..."
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/VBoxContainer/HBoxContainer/RestartLabel"]
+autoplay = "Blink"
+anims/Blink = SubResource( 2 )
+
+[node name="DummyLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+margin_right = 1600.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 850, 200 )
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+align = 1
+
+[node name="CharacterPool" type="Node2D" parent="."]
+visible = false
+position = Vector2( 1375.5, 802.409 )
+script = ExtResource( 6 )
+g_path = "res://scenes/characters/"
+
+[node name="SucculentPool" type="Node2D" parent="."]
+visible = false
+position = Vector2( 1375.5, 802.409 )
+script = ExtResource( 6 )
+g_path = "res://scenes/succulents/"
+g_min_y = 50
+g_max_y = 700
+
+[node name="PowerPool" type="Node2D" parent="."]
+visible = false
+position = Vector2( 1375.5, 802.409 )
+script = ExtResource( 6 )
+g_path = "res://scenes/powers/"
+g_min_y = 50
+g_max_y = 700
+g_copies_of_each = 5
+
+[node name="Penguin" parent="." instance=ExtResource( 7 )]
+position = Vector2( 231.95, 330.267 )
+
+[node name="ButtonRight" type="TouchScreenButton" parent="Penguin"]
+position = Vector2( 568.05, -330.267 )
+normal = ExtResource( 8 )
+shape_centered = false
+shape_visible = false
+
+[node name="ScoreLabel" type="Label" parent="."]
+margin_left = 1258.8
+margin_top = -1.0
+margin_right = 1557.8
+margin_bottom = 170.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "0"
+align = 2
+script = ExtResource( 9 )
+
+[node name="Pauser" type="Node2D" parent="."]
+pause_mode = 2
+script = ExtResource( 10 )
+
+[node name="ControlsContainer" type="HBoxContainer" parent="."]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1600, 900 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 11 )
+g_always_show_instructions = true
+
+[node name="LeftControl" type="Label" parent="ControlsContainer"]
+margin_top = 366.0
+margin_right = 798.0
+margin_bottom = 534.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "tap to flap"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ControlsContainer/LeftControl"]
+autoplay = "Blink"
+playback_speed = 0.5
+anims/Blink = SubResource( 4 )
+
+[node name="RightControl" type="Label" parent="ControlsContainer"]
+margin_left = 802.0
+margin_top = 366.0
+margin_right = 1600.0
+margin_bottom = 534.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "tap to poop"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ControlsContainer/RightControl"]
+autoplay = "Blink"
+playback_speed = 0.5
+anims/Blink = SubResource( 6 )

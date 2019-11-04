@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/Character.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/characters/Character2.png" type="Texture" id=2]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "Walk"
 loop = true
 tracks/0/type = "value"
@@ -19,11 +19,12 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 42.4915, 49.5529 )
-
-[node name="GenericCharacter2" type="KinematicBody2D"]
+[node name="GenericCharacter2" type="StaticBody2D"]
+scale = Vector2( 1.5, 1.5 )
+collision_layer = 4
+collision_mask = 8
 script = ExtResource( 1 )
+g_is_generic = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -32,8 +33,16 @@ hframes = 3
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 autoplay = "Walk"
 playback_speed = 2.0
-anims/Walk = SubResource( 3 )
+anims/Walk = SubResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2.13026, 14.8213 )
-shape = SubResource( 2 )
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="Collision0" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2( 124.782, 1.42337 )
+polygon = PoolVector2Array( -92, -36.9, -80, -25.9, -80, -18.4, -75, -16.4, -75, 32, -77.7, 32, -85, 34.5, -85, 47, -87.1, 47, -93.1, 54, -100, 54, -100, 60.8, -102.2, 63, -121.6, 63, -122.5, 59, -125, 59, -125, 61.9, -145.2, 63, -147, 63, -147, 60, -147.8, 54, -155.4, 54, -157.4, 49, -159.8, 49, -163, 45.8, -163, 33.9, -160.9, 32.7, -162.4, 29, -164.8, 29, -168, 25.8, -168, -17, -165.8, -17, -146, -36.8, -146, -39, -92, -39 )
+
+[node name="Collision0" type="CollisionPolygon2D" parent="."]
+position = Vector2( 124.782, 1.42337 )
+polygon = PoolVector2Array( -92, -36.9, -80, -25.9, -80, -18.4, -75, -16.4, -75, 32, -77.7, 32, -85, 34.5, -85, 47, -87.1, 47, -93.1, 54, -100, 54, -100, 60.8, -102.2, 63, -121.6, 63, -122.5, 59, -125, 59, -125, 61.9, -145.2, 63, -147, 63, -147, 60, -147.8, 54, -155.4, 54, -157.4, 49, -159.8, 49, -163, 45.8, -163, 33.9, -160.9, 32.7, -162.4, 29, -164.8, 29, -168, 25.8, -168, -17, -165.8, -17, -146, -36.8, -146, -39, -92, -39 )
