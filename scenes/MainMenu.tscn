@@ -138,9 +138,6 @@ g_max_spawn_wait_ms = 1000
 "MainMenuUnlocks",
 ] instance=ExtResource( 7 )]
 visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 0.0
 margin_right = 1540.0
 margin_bottom = 780.0
 [connection signal="gui_input" from="VBoxContainer/Play" to="." method="_on_Play_gui_input"]
