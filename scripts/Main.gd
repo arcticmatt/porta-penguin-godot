@@ -25,8 +25,6 @@ func _process(delta):
 func _input(event):
 	if g_game_over_msecs and OS.get_system_time_msecs() - g_game_over_msecs < DISABLE_INPUT_MSECS:
 		return
-	if event is InputEventMouseButton and g_game_over:
-		get_tree().reload_current_scene()
 	else:
 		$ControlsContainer.visible = false
 
@@ -55,8 +53,9 @@ func game_over(game_over_text):
 	$CenterContainer/VBoxContainer/DeathLabel.text = game_over_text
 	g_game_over = true
 	$Penguin.penguin_game_over()
-	Save.save_highscore($ScoreLabel.g_score)
+	Save.save_score($ScoreLabel.g_score)
 	Levels.reset_current_level()
+	$MainMenuLabel.visible = true
 
 func score():
 	$ScoreLabel.increment_score()
@@ -67,3 +66,7 @@ func _update_for_current_level():
 	$CharacterPool.use_params(Levels.get_current_character_pool_params())
 	$SucculentPool.use_params(Levels.get_current_succulent_pool_params())
 	$PowerPool.use_params(Levels.get_current_power_pool_params())
+
+func _on_RestartLabel_gui_input(event):
+	if event is InputEventMouseButton and event.pressed and g_game_over:
+		get_tree().reload_current_scene()

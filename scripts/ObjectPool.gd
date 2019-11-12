@@ -39,7 +39,7 @@ func _ready():
 			object.global_position = _get_random_global_position(object)
 			g_object_pool.append(object)
 			g_object_pool_available.append(object)
-			get_parent().call_deferred('add_child', object)
+			get_parent().call_deferred('add_child_below_node', self, object)
 	
 	g_max_available_objects = g_object_pool.size()
 	
@@ -94,3 +94,11 @@ func _get_random_global_position(object):
 	var texture_height = object.get_height()
 	var starting_y = rand_range(g_min_y, g_max_y) - (texture_height / 2)
 	return Vector2(g_starting_x, starting_y)
+	
+func hide_all():
+	for object in g_object_pool:
+		object.visible = false
+		
+func show_all():
+	for object in g_object_pool:
+		object.visible = true

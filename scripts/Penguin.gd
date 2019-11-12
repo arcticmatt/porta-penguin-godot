@@ -9,6 +9,9 @@ const LAXATIVE_POOP_RATE_MS = 100
 const LAXATIVE_POWER = 'laxative'
 const NONE_POWER = 'none'
 
+export var use_poop_button = false
+export var disable_input = false
+
 var g_dead = false
 var g_poop_pool = []
 var g_num_poops = 30
@@ -25,13 +28,14 @@ var g_last_poop_ms = 0
 signal signal_penguin_dead
 
 func _ready():
+	update_texture()
 	_fill_poop_pool()
 
 func _enter_tree():
 	$PenguinSprite/AnimationPlayer.play("Idling", -1, 2)
 	
 func _input(event):
-	if g_dead or get_tree().paused:
+	if g_dead or get_tree().paused or disable_input:
 		return
 
 	if event is InputEventKey:
@@ -49,7 +53,7 @@ func _process_input():
 	if g_dead or get_tree().paused:
 		return
 
-	if $ButtonRight.is_pressed():
+	if use_poop_button and $ButtonRight.is_pressed():
 		_penguin_poop()
 
 func _fill_poop_pool():
@@ -99,3 +103,8 @@ func use_power(power_label):
 		g_power_acquire_time_secs = OS.get_system_time_secs()
 		g_min_poop_rate_ms = LAXATIVE_POOP_RATE_MS
 		g_power_acquired = LAXATIVE_POWER
+		
+func update_texture():
+	var resource = Settings.get_player_resource()
+	var texture = Utils.get_texture(resource)
+	$PenguinSprite.texture = texture

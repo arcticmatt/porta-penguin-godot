@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/Penguin.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/Penguin.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/players/Penguin.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Flap"
@@ -19,7 +19,23 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-resource_name = "Idling"
+resource_name = "FlapLoop"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
+}
+
+[sub_resource type="Animation" id=3]
 length = 1.1
 loop = true
 tracks/0/type = "value"
@@ -64,11 +80,11 @@ position = Vector2( 0, -10.7863 )
 scale = Vector2( 1.25, 1.25 )
 texture = ExtResource( 2 )
 hframes = 3
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PenguinSprite"]
 anims/Flap = SubResource( 1 )
-anims/Idling = SubResource( 2 )
+anims/FlapLoop = SubResource( 2 )
+anims/Idling = SubResource( 3 )
 
 [node name="PoopPoint" type="Node2D" parent="."]
 position = Vector2( -65.5865, 39.922 )

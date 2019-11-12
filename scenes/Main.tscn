@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/Background.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scripts/Score.gd" type="Script" id=9]
 [ext_resource path="res://scripts/Pauser.gd" type="Script" id=10]
 [ext_resource path="res://scripts/ControlsContainer.gd" type="Script" id=11]
+[ext_resource path="res://scripts/MainMenuLabel.gd" type="Script" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -76,6 +77,11 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="DynamicFont" id=7]
+size = 40
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -122,9 +128,10 @@ margin_bottom = 404.0
 
 [node name="RestartLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 visible = false
-margin_right = 1600.0
+margin_right = 850.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 850, 200 )
+mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 1 )
@@ -171,6 +178,7 @@ g_copies_of_each = 5
 
 [node name="Penguin" parent="." instance=ExtResource( 7 )]
 position = Vector2( 231.95, 330.267 )
+use_poop_button = true
 
 [node name="ButtonRight" type="TouchScreenButton" parent="Penguin"]
 position = Vector2( 568.05, -330.267 )
@@ -195,6 +203,7 @@ script = ExtResource( 10 )
 
 [node name="ControlsContainer" type="HBoxContainer" parent="."]
 pause_mode = 2
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 1600, 900 )
@@ -233,3 +242,17 @@ align = 1
 autoplay = "Blink"
 playback_speed = 0.5
 anims/Blink = SubResource( 6 )
+
+[node name="MainMenuLabel" type="Label" parent="."]
+visible = false
+margin_left = 30.0
+margin_top = 15.0
+margin_right = 358.0
+margin_bottom = 132.0
+mouse_filter = 1
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "main menu"
+script = ExtResource( 12 )
+[connection signal="gui_input" from="CenterContainer/VBoxContainer/HBoxContainer/RestartLabel" to="." method="_on_RestartLabel_gui_input"]
+[connection signal="gui_input" from="MainMenuLabel" to="MainMenuLabel" method="_on_MainMenuLabel_gui_input"]
