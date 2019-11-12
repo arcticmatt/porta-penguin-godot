@@ -3,7 +3,7 @@ extends MarginContainer
 var g_main_scene = preload("res://scenes/Main.tscn")
 
 func _ready():
-	$VBoxContainer/Highscore.text = "Highscore: " + str(Save.get_highscore())
+	$HBoxMain/MarginLeft/VBoxText/Highscore.text = "Highscore: " + str(Save.get_highscore())
 	$Penguin/PenguinSprite/AnimationPlayer.play("Idling", -1, 2)
 
 func _on_Play_gui_input(event):
