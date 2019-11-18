@@ -28,11 +28,12 @@ var g_last_poop_ms = 0
 signal signal_penguin_dead
 
 func _ready():
+	update_accessory()
 	update_texture()
 	_fill_poop_pool()
 
 func _enter_tree():
-	$PenguinSprite/AnimationPlayer.play("Idling", -1, 2)
+	$PenguinSprite/IdleAnimationPlayer.play("Idling", -1, 2)
 	
 func _input(event):
 	if g_dead or get_tree().paused or disable_input:
@@ -73,8 +74,9 @@ func _process(delta):
 func _penguin_jump():
 	set_linear_velocity(Vector2(0, 0))
 	apply_central_impulse(Vector2(0, UP_IMPULSE))
-	$PenguinSprite/AnimationPlayer.stop()
-	$PenguinSprite/AnimationPlayer.play("Flap", -1, 1)
+	$PenguinSprite/FlapAnimationPlayer.stop()
+	$PenguinSprite/IdleAnimationPlayer.stop()
+	$PenguinSprite/FlapAnimationPlayer.play("Flap", -1, 1)
 
 func _penguin_poop():
 	var time_diff = OS.get_system_time_msecs() - g_last_poop_ms
@@ -89,7 +91,7 @@ func _on_PenguinRigidBody_body_entered(body):
 	emit_signal("signal_penguin_dead", Constants.HIT_SOMETHING)
 	
 func penguin_game_over():
-	$PenguinSprite/AnimationPlayer.stop()
+	$PenguinSprite/FlapAnimationPlayer.stop()
 	g_dead = true
 	$PenguinSprite.frame = 2
 		
@@ -103,6 +105,48 @@ func use_power(power_label):
 		g_power_acquire_time_secs = OS.get_system_time_secs()
 		g_min_poop_rate_ms = LAXATIVE_POOP_RATE_MS
 		g_power_acquired = LAXATIVE_POWER
+
+func update_accessory():
+	var accessory = Settings.get_accessory()
+	match accessory:
+		Settings.Accessory.NONE:
+			_hide_all_accessories()
+		Settings.Accessory.BURGER:
+			_hide_all_accessories()
+			$PenguinSprite/Burger.visible = true
+		Settings.Accessory.CHEF:
+			_hide_all_accessories()
+			$PenguinSprite/Chef.visible = true
+		Settings.Accessory.CROWN:
+			_hide_all_accessories()
+			$PenguinSprite/Crown.visible = true
+		Settings.Accessory.MUSHROOM:
+			_hide_all_accessories()
+			$PenguinSprite/Mushroom.visible = true
+		Settings.Accessory.RAINBOW:
+			_hide_all_accessories()
+			$PenguinSprite/Rainbow.visible = true
+		Settings.Accessory.SANTA:
+			_hide_all_accessories()
+			$PenguinSprite/Santa.visible = true
+		Settings.Accessory.STRAW_HAT:
+			_hide_all_accessories()
+			$PenguinSprite/StrawHat.visible = true
+		Settings.Accessory.NOOGLER:
+			_hide_all_accessories()
+			$PenguinSprite/Noogler.visible = true
+		_:
+			_hide_all_accessories()
+
+func _hide_all_accessories():
+	$PenguinSprite/StrawHat.visible = false
+	$PenguinSprite/Noogler.visible = false
+	$PenguinSprite/Burger.visible = false
+	$PenguinSprite/Chef.visible = false
+	$PenguinSprite/Crown.visible = false
+	$PenguinSprite/Mushroom.visible = false
+	$PenguinSprite/Rainbow.visible = false
+	$PenguinSprite/Santa.visible = false
 		
 func update_texture():
 	var resource = Settings.get_player_resource()

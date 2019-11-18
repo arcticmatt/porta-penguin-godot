@@ -4,7 +4,7 @@ var g_main_scene = preload("res://scenes/Main.tscn")
 
 func _ready():
 	$HBoxMain/MarginLeft/VBoxText/Highscore.text = "Highscore: " + str(Save.get_highscore())
-	$Penguin/PenguinSprite/AnimationPlayer.play("Idling", -1, 2)
+	$Penguin/PenguinSprite/IdleAnimationPlayer.play("Idling", -1, 2)
 
 func _on_Play_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
@@ -15,6 +15,7 @@ func _on_Unlocks_gui_input(event):
 		_show_unlocks()
 			
 func _show_unlocks():
+	$Unlocks.enter()
 	for node in get_tree().get_nodes_in_group("MainMenuMain"):
 		node.visible = false
 	for node in get_tree().get_nodes_in_group("MainMenuUnlocks"):
@@ -23,7 +24,8 @@ func _show_unlocks():
 
 func hide_unlocks():
 	$Penguin.update_texture()
-	$Penguin/PenguinSprite/AnimationPlayer.play("Idling", -1, 2)
+	$Penguin.update_accessory()
+	$Penguin/PenguinSprite/IdleAnimationPlayer.play("Idling", -1, 2)
 	for node in get_tree().get_nodes_in_group("MainMenuMain"):
 		node.visible = true
 	for node in get_tree().get_nodes_in_group("MainMenuUnlocks"):

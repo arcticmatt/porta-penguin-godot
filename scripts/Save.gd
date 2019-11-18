@@ -21,13 +21,37 @@ func save_score(score):
 	}
 	save_score.store_line(to_json(dict))
 	
-func save_unlocks_player(player):
+func save_unlocks_accessory(accessory):
+	print("saving accessory", accessory)
+	_save_unlocks_generic("accessory", accessory)
+	
+func _save_unlocks_generic(key, value):
+	# Note: must call this before opening the file
+	var unlocks_dict = _get_unlocks()
+	if unlocks_dict:
+		# Modify existing
+		print("modifying unlocks dict before", unlocks_dict)
+		unlocks_dict[key] = value
+		print("modifying unlocks dict after", unlocks_dict)
+	else:
+		# Make new
+		print("making new unlocks")
+		unlocks_dict = {
+			key: value
+		}
+		
 	var save_unlocks = File.new()
 	save_unlocks.open(UNLOCKS_FILE, File.WRITE)
-	var dict = {
-		"player": player
-	}
-	save_unlocks.store_line(to_json(dict))
+	save_unlocks.store_line(to_json(unlocks_dict))
+	
+func save_unlocks_player(player):
+	_save_unlocks_generic("player", player)
+
+func get_accessory():
+	var first_line = _get_first_line(UNLOCKS_FILE)
+	if not first_line:
+		return Settings.Accessory.NONE
+	return int(first_line["accessory"])
 	
 func get_cumulative_score():
 	var first_line = _get_first_line(SCORE_FILE)
@@ -60,4 +84,8 @@ func _get_first_line(filename):
 	file.open(filename, File.READ)
 	return parse_json(file.get_line())
 	
-	
+func _get_unlocks():
+	var first_line = _get_first_line(UNLOCKS_FILE)
+	if not first_line:
+		return null
+	return first_line
