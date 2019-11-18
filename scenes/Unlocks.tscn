@@ -497,7 +497,6 @@ custom_constants/vseparation = 20
 custom_constants/hseparation = 20
 columns = 4
 script = ExtResource( 4 )
-g_unlock_type = 1
 
 [node name="StrawHatVBox" type="VBoxContainer" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid"]
 margin_right = 192.0

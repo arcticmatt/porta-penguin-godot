@@ -1,7 +1,7 @@
 extends Node
 
 enum Accessory {
-	NONE,
+	NONE = 0,
 	STRAW_HAT,
 	NOOGLER,
 	BURGER,
@@ -13,7 +13,9 @@ enum Accessory {
 }
 
 enum Player {
-	DEFAULT,
+	# Make these two enums mutually exclusive. Probly should've made
+	# them one enum, but whatever
+	DEFAULT = 100,
 	BLUE,
 	ORANGE,
 	PINK,
@@ -68,13 +70,21 @@ func set_player(player):
 	g_player = player
 	Save.save_unlocks_player(player)
 
-func unlock_node_to_accessory(node_name):
+func _unlock_node_to_accessory(node_name):
 	if not node_name:
 		return Accessory.NONE
 	return g_unlock_node_to_accessory[node_name]
 
-func unlock_node_to_player(node_name):
+func _unlock_node_to_player(node_name):
 	return g_unlock_node_to_player[node_name]
+
+func unlock_node_to_unlockable(node_name):
+	if g_unlock_node_to_player.has(node_name):
+		return _unlock_node_to_player(node_name)
+	elif g_unlock_node_to_accessory.has(node_name):
+		return _unlock_node_to_accessory(node_name)
+	else:
+		return Accessory.NONE
 	
 func get_accessory():
 	return g_accessory

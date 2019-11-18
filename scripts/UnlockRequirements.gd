@@ -39,11 +39,14 @@ const PLAYER_REQUIREMENTS = {
 func _ready():
 	pass # Replace with function body.
 	
-func get_accessory_score_required(accessory):
-	return ACCESSORY_REQUIREMENTS[accessory]
-
-func get_player_score_required(player):
-	return PLAYER_REQUIREMENTS[player]
+func get_score_required(unlockable):
+	if ACCESSORY_REQUIREMENTS.has(unlockable):
+		return ACCESSORY_REQUIREMENTS[unlockable]
+	elif PLAYER_REQUIREMENTS.has(unlockable):
+		print("IN HERE")
+		return PLAYER_REQUIREMENTS[unlockable]
+	else:
+		assert(false)
 
 func get_score_possessed(unlock_type):
 	if unlock_type == UnlockRequirementType.HIGHSCORE:

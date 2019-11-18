@@ -108,21 +108,21 @@ class WhichUnlock:
 		g_subfolder = subfolder
 	
 	func get_score_required(name):
-		if g_subfolder == PENGUIN_SUBFOLDER:
-			var player_enum = Settings.unlock_node_to_player(name)
-			return UnlockRequirements.get_player_score_required(player_enum)
-		elif g_subfolder == ACCESSORIES_SUBFOLDER:
-			var accessory_enum = Settings.unlock_node_to_accessory(name)
-			return UnlockRequirements.get_accessory_score_required(accessory_enum)
+		print(name)
+		var enum_val = Settings.unlock_node_to_unlockable(name)
+		print(enum_val)
+		var score = UnlockRequirements.get_score_required(enum_val)
+		print(score)
+		return score
 		
 	func get_selected(name):
 		if g_subfolder == PENGUIN_SUBFOLDER:
-			return Settings.unlock_node_to_player(name) == Settings.get_player()
+			return Settings.unlock_node_to_unlockable(name) == Settings.get_player()
 		elif g_subfolder == ACCESSORIES_SUBFOLDER:
-			return Settings.unlock_node_to_accessory(name) == Settings.get_accessory()
+			return Settings.unlock_node_to_unlockable(name) == Settings.get_accessory()
 			
 	func update_settings(name):
 		if name and g_subfolder == PENGUIN_SUBFOLDER:
-			Settings.set_player(Settings.unlock_node_to_player(name))
+			Settings.set_player(Settings.unlock_node_to_unlockable(name))
 		elif g_subfolder == ACCESSORIES_SUBFOLDER:
-			return Settings.set_accessory(Settings.unlock_node_to_accessory(name))
+			return Settings.set_accessory(Settings.unlock_node_to_unlockable(name))
