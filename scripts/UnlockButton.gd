@@ -12,6 +12,7 @@ export var g_subfolder = PENGUIN_SUBFOLDER
 
 var g_selected_texture = null
 var g_unselected_texture = null
+var g_locked_texture = null
 
 var g_press_time = 0
 var g_press_position = null
@@ -32,14 +33,21 @@ func _ready():
 	var partial_path = "res://assets/sprites/unlocks/" + g_subfolder + "/" + self.name
 	var selected_resource = partial_path + "Selected.png"
 	var unselected_resource = partial_path + "Unselected.png"
+	var locked_resource = null
+	# Hardcoding, hacky
+	if g_subfolder == PENGUIN_SUBFOLDER:
+		locked_resource = "res://assets/sprites/unlocks/penguin/PenguinLocked.png"
+	else:
+		locked_resource = partial_path + "Locked.png"
 	g_selected_texture = Utils.get_texture(selected_resource)
 	g_unselected_texture = Utils.get_texture(unselected_resource)
+	g_locked_texture = Utils.get_texture(locked_resource)
 	
 	_init_texture()
 
 # Differentiate between tap and scroll
 func _on_gui_input(event):
-	if g_selected and g_subfolder == PENGUIN_SUBFOLDER:
+	if (g_selected and g_subfolder == PENGUIN_SUBFOLDER) or self.texture == g_locked_texture:
 		return
 
 	if event is InputEventMouseButton and event.pressed:
@@ -60,6 +68,14 @@ func _on_gui_input(event):
 		_update_texture()
 		
 func _init_texture():
+	var score_required = g_which_unlock.get_score_required(self.name)
+	var score_possessed = UnlockRequirements.get_score_possessed(g_unlock_grid.get_unlock_requirement_type())
+	
+	if score_possessed < score_required:
+		print("using locked texture")
+		self.texture = g_locked_texture
+		return
+	
 	if g_selected:
 		self.texture = g_selected_texture
 		g_unlock_grid.set_selected_node(self)
@@ -90,6 +106,14 @@ class WhichUnlock:
 	var g_subfolder = null
 	func _init(subfolder):
 		g_subfolder = subfolder
+	
+	func get_score_required(name):
+		if g_subfolder == PENGUIN_SUBFOLDER:
+			var player_enum = Settings.unlock_node_to_player(name)
+			return UnlockRequirements.get_player_score_required(player_enum)
+		elif g_subfolder == ACCESSORIES_SUBFOLDER:
+			var accessory_enum = Settings.unlock_node_to_accessory(name)
+			return UnlockRequirements.get_accessory_score_required(accessory_enum)
 		
 	func get_selected(name):
 		if g_subfolder == PENGUIN_SUBFOLDER:
