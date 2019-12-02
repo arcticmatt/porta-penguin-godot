@@ -27,6 +27,10 @@ func _input(event):
 		return
 	else:
 		$ControlsContainer.visible = false
+		
+	# For video recording
+	if $CenterContainer/VBoxContainer/HBoxContainer/RestartLabel.visible and event.is_action_pressed("restart"):
+		get_tree().reload_current_scene()
 
 func _add_wall(position, size):
 	var rect = RectangleShape2D.new()
