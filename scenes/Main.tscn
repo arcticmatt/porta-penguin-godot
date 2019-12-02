@@ -210,14 +210,12 @@ script = ExtResource( 11 )
 
 [node name="ControlsContainer" type="HBoxContainer" parent="."]
 pause_mode = 2
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 1600, 900 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 12 )
-g_always_show_instructions = true
 
 [node name="LeftControl" type="Label" parent="ControlsContainer"]
 margin_top = 366.0
