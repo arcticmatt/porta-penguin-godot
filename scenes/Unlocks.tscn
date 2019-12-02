@@ -73,12 +73,12 @@ size = 30
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=9]
-size = 12
+[sub_resource type="DynamicFont" id=7]
+size = 19
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_position")
 tracks/0/interp = 1
@@ -92,8 +92,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 296 ), Vector2( -1600, 296 ) ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "MoveForward"
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_position")
 tracks/0/interp = 1
@@ -209,7 +208,7 @@ scroll_horizontal_enabled = false
 
 [node name="UnlockGrid" type="GridContainer" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll"]
 margin_right = 828.0
-margin_bottom = 520.0
+margin_bottom = 577.0
 size_flags_horizontal = 6
 custom_constants/vseparation = 20
 custom_constants/hseparation = 20
@@ -219,7 +218,7 @@ g_unlock_requirement_type = 1
 
 [node name="BwVBox" type="VBoxContainer" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid"]
 margin_right = 192.0
-margin_bottom = 231.0
+margin_bottom = 250.0
 
 [node name="PenguinBw" type="TextureRect" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/BwVBox"]
 margin_right = 192.0
@@ -231,8 +230,8 @@ g_selected = true
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/BwVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "unlocked"
 align = 1
@@ -241,7 +240,7 @@ script = ExtResource( 7 )
 [node name="BlueVBox" type="VBoxContainer" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid"]
 margin_left = 212.0
 margin_right = 404.0
-margin_bottom = 231.0
+margin_bottom = 250.0
 
 [node name="PenguinBlue" type="TextureRect" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/BlueVBox"]
 margin_right = 192.0
@@ -252,8 +251,8 @@ script = ExtResource( 6 )
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/BlueVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "100"
 align = 1
@@ -262,7 +261,7 @@ script = ExtResource( 7 )
 [node name="OrangeVBox" type="VBoxContainer" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid"]
 margin_left = 424.0
 margin_right = 616.0
-margin_bottom = 231.0
+margin_bottom = 250.0
 
 [node name="PenguinOrange" type="TextureRect" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/OrangeVBox"]
 margin_right = 192.0
@@ -273,8 +272,8 @@ script = ExtResource( 6 )
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/OrangeVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "200"
 align = 1
@@ -283,7 +282,7 @@ script = ExtResource( 7 )
 [node name="PinkVBox" type="VBoxContainer" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid"]
 margin_left = 636.0
 margin_right = 828.0
-margin_bottom = 231.0
+margin_bottom = 250.0
 
 [node name="PenguinPink" type="TextureRect" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/PinkVBox"]
 margin_right = 192.0
@@ -294,17 +293,17 @@ script = ExtResource( 6 )
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/PinkVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "300"
 align = 1
 script = ExtResource( 7 )
 
 [node name="PurpleVBox" type="VBoxContainer" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid"]
-margin_top = 251.0
+margin_top = 270.0
 margin_right = 192.0
-margin_bottom = 520.0
+margin_bottom = 577.0
 
 [node name="PenguinPurple" type="TextureRect" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/PurpleVBox"]
 margin_right = 192.0
@@ -315,8 +314,8 @@ script = ExtResource( 6 )
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/PurpleVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 269.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 307.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "400
 "
@@ -325,9 +324,9 @@ script = ExtResource( 7 )
 
 [node name="TealVBox" type="VBoxContainer" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid"]
 margin_left = 212.0
-margin_top = 251.0
+margin_top = 270.0
 margin_right = 404.0
-margin_bottom = 520.0
+margin_bottom = 577.0
 
 [node name="PenguinTeal" type="TextureRect" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/TealVBox"]
 margin_right = 192.0
@@ -338,8 +337,8 @@ script = ExtResource( 6 )
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/TealVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "500"
 align = 1
@@ -347,9 +346,9 @@ script = ExtResource( 7 )
 
 [node name="YellowVBox" type="VBoxContainer" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid"]
 margin_left = 424.0
-margin_top = 251.0
+margin_top = 270.0
 margin_right = 616.0
-margin_bottom = 520.0
+margin_bottom = 577.0
 
 [node name="PenguinYellow" type="TextureRect" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/YellowVBox"]
 margin_right = 192.0
@@ -360,8 +359,8 @@ script = ExtResource( 6 )
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/YellowVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "600"
 align = 1
@@ -369,9 +368,9 @@ script = ExtResource( 7 )
 
 [node name="CatVBox" type="VBoxContainer" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid"]
 margin_left = 636.0
-margin_top = 251.0
+margin_top = 270.0
 margin_right = 828.0
-margin_bottom = 520.0
+margin_bottom = 577.0
 
 [node name="Dummy" type="TextureRect" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/CatVBox"]
 margin_right = 192.0
@@ -381,8 +380,8 @@ texture = ExtResource( 14 )
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll/UnlockGrid/CatVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "700"
 align = 1
@@ -466,8 +465,8 @@ size_flags_horizontal = 7
 size_flags_vertical = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks"]
-anims/MoveBack = SubResource( 7 )
-anims/MoveForward = SubResource( 8 )
+anims/MoveBack = SubResource( 8 )
+anims/MoveForward = SubResource( 9 )
 
 [node name="Previous" type="Label" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks"]
 margin_top = 260.0
@@ -491,7 +490,7 @@ scroll_horizontal_enabled = false
 
 [node name="UnlockGrid" type="GridContainer" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll"]
 margin_right = 828.0
-margin_bottom = 482.0
+margin_bottom = 520.0
 size_flags_horizontal = 6
 custom_constants/vseparation = 20
 custom_constants/hseparation = 20
@@ -500,7 +499,7 @@ script = ExtResource( 4 )
 
 [node name="StrawHatVBox" type="VBoxContainer" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid"]
 margin_right = 192.0
-margin_bottom = 231.0
+margin_bottom = 250.0
 
 [node name="StrawHat" type="TextureRect" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/StrawHatVBox"]
 margin_right = 192.0
@@ -514,8 +513,8 @@ g_subfolder = "accessories"
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/StrawHatVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "100"
 align = 1
@@ -524,7 +523,7 @@ script = ExtResource( 7 )
 [node name="NooglerVBox" type="VBoxContainer" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid"]
 margin_left = 212.0
 margin_right = 404.0
-margin_bottom = 231.0
+margin_bottom = 250.0
 
 [node name="Noogler" type="TextureRect" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/NooglerVBox"]
 margin_right = 192.0
@@ -538,8 +537,8 @@ g_subfolder = "accessories"
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/NooglerVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "200"
 align = 1
@@ -548,7 +547,7 @@ script = ExtResource( 7 )
 [node name="BurgerVBox" type="VBoxContainer" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid"]
 margin_left = 424.0
 margin_right = 616.0
-margin_bottom = 231.0
+margin_bottom = 250.0
 
 [node name="Burger" type="TextureRect" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/BurgerVBox"]
 margin_right = 192.0
@@ -562,8 +561,8 @@ g_subfolder = "accessories"
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/BurgerVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "300"
 align = 1
@@ -572,7 +571,7 @@ script = ExtResource( 7 )
 [node name="ChefVBox" type="VBoxContainer" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid"]
 margin_left = 636.0
 margin_right = 828.0
-margin_bottom = 231.0
+margin_bottom = 250.0
 
 [node name="Chef" type="TextureRect" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/ChefVBox"]
 margin_right = 192.0
@@ -586,17 +585,17 @@ g_subfolder = "accessories"
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/ChefVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "400"
 align = 1
 script = ExtResource( 7 )
 
 [node name="CrownVBox" type="VBoxContainer" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid"]
-margin_top = 251.0
+margin_top = 270.0
 margin_right = 192.0
-margin_bottom = 482.0
+margin_bottom = 520.0
 
 [node name="Crown" type="TextureRect" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/CrownVBox"]
 margin_right = 192.0
@@ -610,8 +609,8 @@ g_subfolder = "accessories"
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/CrownVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "500"
 align = 1
@@ -619,9 +618,9 @@ script = ExtResource( 7 )
 
 [node name="MushroomVBox" type="VBoxContainer" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid"]
 margin_left = 212.0
-margin_top = 251.0
+margin_top = 270.0
 margin_right = 404.0
-margin_bottom = 482.0
+margin_bottom = 520.0
 
 [node name="Mushroom" type="TextureRect" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/MushroomVBox"]
 margin_right = 192.0
@@ -635,8 +634,8 @@ g_subfolder = "accessories"
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/MushroomVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "600"
 align = 1
@@ -644,9 +643,9 @@ script = ExtResource( 7 )
 
 [node name="RainbowVBox" type="VBoxContainer" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid"]
 margin_left = 424.0
-margin_top = 251.0
+margin_top = 270.0
 margin_right = 616.0
-margin_bottom = 482.0
+margin_bottom = 520.0
 
 [node name="Rainbow" type="TextureRect" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/RainbowVBox"]
 margin_right = 192.0
@@ -660,8 +659,8 @@ g_subfolder = "accessories"
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/RainbowVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "700"
 align = 1
@@ -669,9 +668,9 @@ script = ExtResource( 7 )
 
 [node name="SantaVBox" type="VBoxContainer" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid"]
 margin_left = 636.0
-margin_top = 251.0
+margin_top = 270.0
 margin_right = 828.0
-margin_bottom = 482.0
+margin_bottom = 520.0
 
 [node name="Santa" type="TextureRect" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/SantaVBox"]
 margin_right = 192.0
@@ -685,8 +684,8 @@ g_subfolder = "accessories"
 [node name="RequiredText" type="Label" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll/UnlockGrid/SantaVBox"]
 margin_top = 196.0
 margin_right = 192.0
-margin_bottom = 231.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "800"
 align = 1

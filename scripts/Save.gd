@@ -22,7 +22,6 @@ func save_score(score):
 	save_score.store_line(to_json(dict))
 	
 func save_unlocks_accessory(accessory):
-	print("saving accessory", accessory)
 	_save_unlocks_generic("accessory", accessory)
 	
 func _save_unlocks_generic(key, value):
@@ -30,12 +29,9 @@ func _save_unlocks_generic(key, value):
 	var unlocks_dict = _get_unlocks()
 	if unlocks_dict:
 		# Modify existing
-		print("modifying unlocks dict before", unlocks_dict)
 		unlocks_dict[key] = value
-		print("modifying unlocks dict after", unlocks_dict)
 	else:
 		# Make new
-		print("making new unlocks")
 		unlocks_dict = {
 			key: value
 		}

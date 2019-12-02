@@ -2,16 +2,9 @@ extends RigidBody2D
 
 const MIN_STARTING_VELOCITY = Vector2(0, 40)
 const OFFSCREEN_POSITION = Vector2(-100, -100)
-const SCALE = Vector2(1.5, 1.5)
 
 # Offscreen it, otherwise it's weird
 var g_starting_position = OFFSCREEN_POSITION
-
-func _ready():
-	$Sprite.set_scale(SCALE)
-	$BottomCollision.set_scale(SCALE)
-	$MiddleCollision.set_scale(SCALE)
-	$TopCollision.set_scale(SCALE)
 
 func deactivate():
 	visible = false
@@ -19,8 +12,9 @@ func deactivate():
 	set_gravity_scale(0)
 	g_starting_position = OFFSCREEN_POSITION
 	
-func activate(starting_velocity, new_position):
+func activate(starting_velocity, new_position, scale):
 	set_gravity_scale(10)
+	_set_scale(scale)
 	g_starting_position = new_position
 	visible = true
 	if starting_velocity > MIN_STARTING_VELOCITY:
@@ -40,3 +34,9 @@ func _on_Poop_body_entered(body):
 	if body.get_collision_layer_bit(2) and not body.g_is_generic:
 		# This is kinda jank, whatever
 		get_parent().score()
+		
+func _set_scale(scale):
+	$Sprite.set_scale(scale)
+	$BottomCollision.set_scale(scale)
+	$MiddleCollision.set_scale(scale)
+	$TopCollision.set_scale(scale)

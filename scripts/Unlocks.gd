@@ -1,7 +1,7 @@
 extends MarginContainer
 
 const TITLES = [
-	"Playable Characters",
+	"Characters",
 	"Accessories",
 ]
 var g_index = 0
@@ -20,7 +20,6 @@ func _on_Back_gui_input(event):
 
 func _on_Next_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
-		print("next pressed!")
 		$HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/AnimationPlayer.play("MoveBack")
 		$HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/AnimationPlayer.play("MoveBack")
 		g_index += 1
@@ -28,7 +27,6 @@ func _on_Next_gui_input(event):
 
 func _on_Previous_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
-		print("previous pressed!")
 		$HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/AnimationPlayer.play("MoveForward")
 		$HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/AnimationPlayer.play("MoveForward")
 		g_index -= 1
@@ -36,7 +34,7 @@ func _on_Previous_gui_input(event):
 		
 func _get_subtitle(index):
 	var subtitles = [
-		"You've pooped on %s people!" % Save.get_cumulative_score(),
+		"You've pooped on %s people" % Save.get_cumulative_score(),
 		"Your highscore is %s" % Save.get_highscore(),
 	]
 	return subtitles[index]

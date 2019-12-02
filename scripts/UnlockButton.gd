@@ -72,7 +72,6 @@ func _init_texture():
 	var score_possessed = UnlockRequirements.get_score_possessed(g_unlock_grid.get_unlock_requirement_type())
 	
 	if score_possessed < score_required:
-		print("using locked texture")
 		self.texture = g_locked_texture
 		return
 	
@@ -108,11 +107,8 @@ class WhichUnlock:
 		g_subfolder = subfolder
 	
 	func get_score_required(name):
-		print(name)
 		var enum_val = Settings.unlock_node_to_unlockable(name)
-		print(enum_val)
 		var score = UnlockRequirements.get_score_required(enum_val)
-		print(score)
 		return score
 		
 	func get_selected(name):

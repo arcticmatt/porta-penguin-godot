@@ -4,8 +4,11 @@ const UP_IMPULSE = -55
 const INITIAL_BOOST = Vector2(0, -300)
 const DEFAULT_POOP_RATE_MS = 750
 const LAXATIVE_POOP_RATE_MS = 100
+const DEFAULT_POOP_SCALE = Vector2(1.5, 1.5)
+const CONSTIPATION_POOP_SCALE = Vector2(3, 3)
 
 # Powers
+const CONSTIPATION_POWER = 'constipation'
 const LAXATIVE_POWER = 'laxative'
 const NONE_POWER = 'none'
 
@@ -20,6 +23,7 @@ var g_poop_res = preload("res://scenes/Poop.tscn")
 var g_power_acquire_time_secs = 0
 var g_max_power_duration_time_secs = 10
 var g_power_acquired = NONE_POWER
+var g_poop_scale = DEFAULT_POOP_SCALE
 
 var g_min_poop_rate_ms = DEFAULT_POOP_RATE_MS
 var g_last_poop_ms = 0
@@ -85,7 +89,11 @@ func _penguin_poop():
 	g_last_poop_ms = OS.get_system_time_msecs()
 	var poop_object = g_poop_pool[g_current_poop]
 	g_current_poop = (g_current_poop + 1) % g_num_poops
-	poop_object.activate(get_linear_velocity(), position + $PoopPoint.position)
+	poop_object.activate(
+		get_linear_velocity(), 
+		position + $PoopPoint.position, 
+		g_poop_scale)
+	$PoopAudioPlayer.play()
 
 func _on_PenguinRigidBody_body_entered(body):
 	emit_signal("signal_penguin_dead", Constants.HIT_SOMETHING)
@@ -96,15 +104,18 @@ func penguin_game_over():
 	$PenguinSprite.frame = 2
 		
 func _lose_all_powers():
-	print("Lost powers :(")
 	g_power_acquired = NONE_POWER
 	g_min_poop_rate_ms = DEFAULT_POOP_RATE_MS
+	g_poop_scale = DEFAULT_POOP_SCALE
 
 func use_power(power_label):
 	if power_label == LAXATIVE_POWER:
 		g_power_acquire_time_secs = OS.get_system_time_secs()
 		g_min_poop_rate_ms = LAXATIVE_POOP_RATE_MS
 		g_power_acquired = LAXATIVE_POWER
+	elif power_label == CONSTIPATION_POWER:
+		g_power_acquire_time_secs = OS.get_system_time_secs()
+		g_poop_scale = CONSTIPATION_POOP_SCALE
 
 func update_accessory():
 	var accessory = Settings.get_accessory()

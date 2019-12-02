@@ -16,23 +16,23 @@ enum UnlockRequirementType {
 
 const ACCESSORY_REQUIREMENTS = {
 	Settings.Accessory.STRAW_HAT: 10,
-	Settings.Accessory.NOOGLER: 20,
-	Settings.Accessory.BURGER: 30,
-	Settings.Accessory.CHEF: 40,
-	Settings.Accessory.CROWN: 50,
-	Settings.Accessory.MUSHROOM: 60,
-	Settings.Accessory.RAINBOW: 70,
-	Settings.Accessory.SANTA: 80
+	Settings.Accessory.NOOGLER: 30,
+	Settings.Accessory.BURGER: 50,
+	Settings.Accessory.CHEF: 70,
+	Settings.Accessory.CROWN: 90,
+	Settings.Accessory.MUSHROOM: 110,
+	Settings.Accessory.RAINBOW: 130,
+	Settings.Accessory.SANTA: 150
 }
 
 const PLAYER_REQUIREMENTS = {
 	Settings.Player.DEFAULT: 0,
-	Settings.Player.BLUE: 101,
-	Settings.Player.ORANGE: 203,
-	Settings.Player.PINK: 304,
-	Settings.Player.PURPLE: 356,
-	Settings.Player.TEAL: 604,
-	Settings.Player.YELLOW: 709
+	Settings.Player.BLUE: 50,
+	Settings.Player.ORANGE: 100,
+	Settings.Player.PINK: 150,
+	Settings.Player.PURPLE: 200,
+	Settings.Player.TEAL: 250,
+	Settings.Player.YELLOW: 300
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -43,7 +43,6 @@ func get_score_required(unlockable):
 	if ACCESSORY_REQUIREMENTS.has(unlockable):
 		return ACCESSORY_REQUIREMENTS[unlockable]
 	elif PLAYER_REQUIREMENTS.has(unlockable):
-		print("IN HERE")
 		return PLAYER_REQUIREMENTS[unlockable]
 	else:
 		assert(false)
@@ -56,3 +55,32 @@ func get_score_possessed(unlock_type):
 	else:
 		assert(false)
 
+func is_new_accessory_unlocked(new_highscore):
+	var current_highscore = Save.get_highscore()
+	var last_key = ACCESSORY_REQUIREMENTS.keys()[ACCESSORY_REQUIREMENTS.size() - 1]
+	var current_key = last_key
+	
+	for key in ACCESSORY_REQUIREMENTS:
+		if ACCESSORY_REQUIREMENTS[key] > current_highscore:
+			current_key = key - 1
+			break
+		
+	if current_key == last_key:
+		return false
+	
+	return new_highscore >= ACCESSORY_REQUIREMENTS[current_key + 1]
+	
+func is_new_character_unlocked(additional_score):
+	var current_cumulative_score = Save.get_cumulative_score()
+	var last_key = PLAYER_REQUIREMENTS.keys()[PLAYER_REQUIREMENTS.size() - 1]
+	var current_key = last_key
+	
+	for key in PLAYER_REQUIREMENTS:
+		if PLAYER_REQUIREMENTS[key] > current_cumulative_score:
+			current_key = key - 1
+			break
+		
+	if current_key == last_key:
+		return false
+	
+	return current_cumulative_score + additional_score >= PLAYER_REQUIREMENTS[current_key + 1]

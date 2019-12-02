@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/Background.png" type="Texture" id=2]
@@ -8,10 +8,13 @@
 [ext_resource path="res://scripts/ObjectPool.gd" type="Script" id=6]
 [ext_resource path="res://scenes/Penguin.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/transparent.png" type="Texture" id=8]
-[ext_resource path="res://scripts/Score.gd" type="Script" id=9]
-[ext_resource path="res://scripts/Pauser.gd" type="Script" id=10]
-[ext_resource path="res://scripts/ControlsContainer.gd" type="Script" id=11]
-[ext_resource path="res://scripts/MainMenuLabel.gd" type="Script" id=12]
+[ext_resource path="res://assets/sounds/Fart.wav" type="AudioStream" id=9]
+[ext_resource path="res://scripts/Score.gd" type="Script" id=10]
+[ext_resource path="res://scripts/Pauser.gd" type="Script" id=11]
+[ext_resource path="res://scripts/ControlsContainer.gd" type="Script" id=12]
+[ext_resource path="res://scripts/MainMenuLabel.gd" type="Script" id=13]
+[ext_resource path="res://assets/sounds/Squish.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/MainSong.wav" type="AudioStream" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -164,7 +167,7 @@ visible = false
 position = Vector2( 1375.5, 802.409 )
 script = ExtResource( 6 )
 g_path = "res://scenes/succulents/"
-g_min_y = 50
+g_min_y = 100
 g_max_y = 700
 
 [node name="PowerPool" type="Node2D" parent="."]
@@ -172,7 +175,7 @@ visible = false
 position = Vector2( 1375.5, 802.409 )
 script = ExtResource( 6 )
 g_path = "res://scenes/powers/"
-g_min_y = 50
+g_min_y = 100
 g_max_y = 700
 g_copies_of_each = 5
 
@@ -186,6 +189,10 @@ normal = ExtResource( 8 )
 shape_centered = false
 shape_visible = false
 
+[node name="PoopAudioPlayer" type="AudioStreamPlayer" parent="Penguin"]
+stream = ExtResource( 9 )
+volume_db = -9.176
+
 [node name="ScoreLabel" type="Label" parent="."]
 margin_left = 1258.8
 margin_top = -1.0
@@ -195,11 +202,11 @@ custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "0"
 align = 2
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 
 [node name="Pauser" type="Node2D" parent="."]
 pause_mode = 2
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="ControlsContainer" type="HBoxContainer" parent="."]
 pause_mode = 2
@@ -209,7 +216,7 @@ anchor_bottom = 1.0
 rect_min_size = Vector2( 1600, 900 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 11 )
+script = ExtResource( 12 )
 g_always_show_instructions = true
 
 [node name="LeftControl" type="Label" parent="ControlsContainer"]
@@ -253,6 +260,14 @@ mouse_filter = 1
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "main menu"
-script = ExtResource( 12 )
+script = ExtResource( 13 )
+
+[node name="SquishAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 14 )
+
+[node name="MusicAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+pause_mode = 2
+stream = ExtResource( 15 )
+autoplay = true
 [connection signal="gui_input" from="CenterContainer/VBoxContainer/HBoxContainer/RestartLabel" to="." method="_on_RestartLabel_gui_input"]
 [connection signal="gui_input" from="MainMenuLabel" to="MainMenuLabel" method="_on_MainMenuLabel_gui_input"]

@@ -26,6 +26,7 @@ func reset():
 func start(velocity):
 	g_velocity = -velocity
 	$Collision0.disabled = false
+	$Sprite/AnimationPlayer.play("Walk")
 	
 func update_velocity(velocity):
 	g_velocity = -velocity
@@ -33,9 +34,9 @@ func update_velocity(velocity):
 func _on_body_entered(body):
 	# Pooped on
 	if body.get_collision_layer_bit(3):
+		get_parent().get_node("SquishAudioPlayer").play()
 		$Sprite/AnimationPlayer.stop()
 		$Sprite.frame = 2
-		
-	# If a "generic" character is pooped on, it's game over!
-	if g_is_generic:
-		get_parent().game_over(Constants.POOP_ON_GENERIC)
+		# If a "generic" character is pooped on, it's game over!
+		if g_is_generic:
+			get_parent().game_over(Constants.POOP_ON_GENERIC)

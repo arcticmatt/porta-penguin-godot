@@ -23,6 +23,7 @@ func use_params(params):
 	g_max_spawn_wait_ms = params.max_spawn_wait_ms
 	g_object_velocity = params.object_velocity
 	disabled = params.disabled
+	print("g_path = ", g_path, ", disabled = ", disabled)
 	# Update speed of objects that are currently on screen
 	for object in g_object_pool:
 		var x = object.global_position.x

@@ -50,7 +50,12 @@ func game_over(game_over_text):
 		return
 	g_game_over_msecs = OS.get_system_time_msecs()
 	$CenterContainer.visible = true
-	$CenterContainer/VBoxContainer/DeathLabel.text = game_over_text
+	if UnlockRequirements.is_new_accessory_unlocked($ScoreLabel.g_score):
+		$CenterContainer/VBoxContainer/DeathLabel.text = Constants.NEW_ACCESSORY
+	elif UnlockRequirements.is_new_character_unlocked($ScoreLabel.g_score):
+		$CenterContainer/VBoxContainer/DeathLabel.text = Constants.NEW_CHARACTER
+	else:
+		$CenterContainer/VBoxContainer/DeathLabel.text = game_over_text
 	g_game_over = true
 	$Penguin.penguin_game_over()
 	Save.save_score($ScoreLabel.g_score)
@@ -58,11 +63,14 @@ func game_over(game_over_text):
 	$MainMenuLabel.visible = true
 
 func score():
+	if g_game_over:
+		return
 	$ScoreLabel.increment_score()
 	if Levels.advance_level_if_valid($ScoreLabel.g_score):
 		_update_for_current_level()
 
 func _update_for_current_level():
+	print("updating for current level!")
 	$CharacterPool.use_params(Levels.get_current_character_pool_params())
 	$SucculentPool.use_params(Levels.get_current_succulent_pool_params())
 	$PowerPool.use_params(Levels.get_current_power_pool_params())

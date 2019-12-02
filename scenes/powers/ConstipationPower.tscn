@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/Power.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/powers/ConstipationPill1.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/powers/ConstipationPill2.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/powers/ConstipationPill3.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "Sparkle",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=2]
+resource_name = "Rotate"
+length = 1.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 22.1033
+height = 39.822
+
+[node name="ConstipationPower" type="Area2D"]
+collision_layer = 32
+collision_mask = 10
+script = ExtResource( 1 )
+g_power_label = "constipation"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Sparkle"
+playing = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Rotate"
+playback_speed = 0.75
+anims/Rotate = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
