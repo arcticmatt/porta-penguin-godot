@@ -27,6 +27,7 @@ Levels="*res://scripts/Levels.gd"
 Settings="*res://scripts/Settings.gd"
 Utils="*res://scripts/Utils.gd"
 UnlockRequirements="*res://scripts/UnlockRequirements.gd"
+MusicPlayer="*res://scripts/MusicPlayer.gd"
 
 [display]
 

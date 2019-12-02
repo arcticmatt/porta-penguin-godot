@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/Background.png" type="Texture" id=2]
@@ -14,7 +14,6 @@
 [ext_resource path="res://scripts/ControlsContainer.gd" type="Script" id=12]
 [ext_resource path="res://scripts/MainMenuLabel.gd" type="Script" id=13]
 [ext_resource path="res://assets/sounds/Squish.wav" type="AudioStream" id=14]
-[ext_resource path="res://assets/sounds/MainSong.wav" type="AudioStream" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -262,10 +261,5 @@ script = ExtResource( 13 )
 
 [node name="SquishAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 14 )
-
-[node name="MusicAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-pause_mode = 2
-stream = ExtResource( 15 )
-autoplay = true
 [connection signal="gui_input" from="CenterContainer/VBoxContainer/HBoxContainer/RestartLabel" to="." method="_on_RestartLabel_gui_input"]
 [connection signal="gui_input" from="MainMenuLabel" to="MainMenuLabel" method="_on_MainMenuLabel_gui_input"]
