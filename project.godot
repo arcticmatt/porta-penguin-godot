@@ -16,7 +16,8 @@ _global_script_class_icons={
 [application]
 
 config/name="poop-game-godot"
-run/main_scene="res://scenes/MainMenu.tscn"
+run/main_scene="res://scenes/Splash.tscn"
+boot_splash/image="res://assets/splash/iPhone2208x1242.png"
 config/icon="res://icon.png"
 
 [autoload]
