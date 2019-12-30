@@ -21,7 +21,7 @@ var g_num_poops = 30
 var g_current_poop = 0
 var g_poop_res = preload("res://scenes/Poop.tscn")
 var g_power_acquire_time_secs = 0
-var g_max_power_duration_time_secs = 10
+var g_max_power_duration_time_secs = 8
 var g_power_acquired = NONE_POWER
 var g_poop_scale = DEFAULT_POOP_SCALE
 
@@ -109,13 +109,14 @@ func _lose_all_powers():
 	g_poop_scale = DEFAULT_POOP_SCALE
 
 func use_power(power_label):
+	g_power_acquired = power_label
+	g_power_acquire_time_secs = OS.get_system_time_secs()
 	if power_label == LAXATIVE_POWER:
-		g_power_acquire_time_secs = OS.get_system_time_secs()
 		g_min_poop_rate_ms = LAXATIVE_POOP_RATE_MS
-		g_power_acquired = LAXATIVE_POWER
 	elif power_label == CONSTIPATION_POWER:
-		g_power_acquire_time_secs = OS.get_system_time_secs()
 		g_poop_scale = CONSTIPATION_POOP_SCALE
+	else:
+		assert(false)
 
 func update_accessory():
 	var accessory = Settings.get_accessory()

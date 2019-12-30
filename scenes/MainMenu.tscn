@@ -39,18 +39,18 @@ tracks/0/keys = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 1600.0
-margin_bottom = -75.0
+margin_bottom = -100.0
 script = ExtResource( 1 )
 
 [node name="HBoxMain" type="HBoxContainer" parent="."]
 margin_right = 3200.0
-margin_bottom = 825.0
+margin_bottom = 800.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MarginLeft" type="MarginContainer" parent="HBoxMain"]
 margin_right = 1598.0
-margin_bottom = 825.0
+margin_bottom = 800.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -58,7 +58,7 @@ size_flags_vertical = 3
 "MainMenuMain",
 ]]
 margin_right = 1598.0
-margin_bottom = 825.0
+margin_bottom = 800.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -113,7 +113,7 @@ __meta__ = {
 [node name="MarginRight" type="MarginContainer" parent="HBoxMain"]
 margin_left = 1602.0
 margin_right = 3200.0
-margin_bottom = 825.0
+margin_bottom = 800.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -159,6 +159,6 @@ visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 3200.0
-margin_bottom = 825.0
+margin_bottom = 800.0
 [connection signal="gui_input" from="HBoxMain/MarginLeft/VBoxText/Play" to="." method="_on_Play_gui_input"]
 [connection signal="gui_input" from="HBoxMain/MarginLeft/VBoxText/Unlocks" to="." method="_on_Unlocks_gui_input"]
