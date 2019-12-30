@@ -6,6 +6,21 @@ const TITLES = [
 ]
 var g_index = 0
 
+func _input(event):
+	# For testing
+	if event.is_action_pressed("next"):
+		$HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/AnimationPlayer.play("MoveBack")
+		$HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/AnimationPlayer.play("MoveBack")
+		g_index += 1
+		_update_text()
+	elif event.is_action_pressed("previous"):
+		$HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/AnimationPlayer.play("MoveForward")
+		$HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/AnimationPlayer.play("MoveForward")
+		g_index -= 1
+		_update_text()
+	elif event.is_action_pressed("hide_unlocks"):
+		get_parent().hide_unlocks()
+	
 func _ready():
 	g_index = 0
 	_update_text()

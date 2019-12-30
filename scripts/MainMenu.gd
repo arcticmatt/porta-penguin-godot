@@ -2,6 +2,11 @@ extends MarginContainer
 
 var g_main_scene = preload("res://scenes/Main.tscn")
 
+func _input(event):
+	# For testing
+	if event.is_action_pressed("show_unlocks"):
+		_show_unlocks()
+
 func _ready():
 	$HBoxMain/MarginLeft/VBoxText/Highscore.text = "Highscore: " + str(Save.get_highscore())
 	$Penguin/PenguinSprite/IdleAnimationPlayer.play("Idling", -1, 2)
