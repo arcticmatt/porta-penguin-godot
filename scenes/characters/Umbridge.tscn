@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/Character.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/characters/Umbridge.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/characters/UmbridgeNew.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Walk"
@@ -27,6 +27,7 @@ collision_mask = 8
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -0.194814, 0 )
 texture = ExtResource( 2 )
 hframes = 3
 frame = 1
@@ -41,9 +42,11 @@ collision_layer = 4
 collision_mask = 8
 
 [node name="Collision0" type="CollisionPolygon2D" parent="Area2D"]
-position = Vector2( 102.225, -0.466782 )
-polygon = PoolVector2Array( -72, -41.9, -58, -28.9, -58, 2, -60.3, 2, -76, 14, -66, 23.1, -66, 34, -68.2, 34, -78, 42.9, -78, 48.8, -81.2, 52, -95.2, 52, -97.2, 48, -102, 48, -102, 49.7, -117.9, 52, -120, 52, -120, 49, -121.5, 44, -122.8, 44, -134, 32.8, -134, 23.2, -125.1, 13.5, -129, 8, -134.8, 8, -142, 0.799999, -142, -28.9, -128, -41.9, -128, -44, -72, -44 )
+position = Vector2( -0.831868, 2.68967 )
+scale = Vector2( 0.945013, 0.945013 )
+polygon = PoolVector2Array( 28, -41.9, 42, -28.9, 42, 2, 39.7, 2, 24, 14, 34, 23.1, 34, 34, 31.9, 34, 14.9, 52, -16, 52, -16, 49.8, -23.8, 42, -24.5, 42, -32, 45, -32, 41.9, -51, 24.9, -51, 18, -48.5, 18, -41, 15, -41, 18.1, -38, 20.5, -38, 18, -29, 18, -24, 14, -28.9, 8, -34.8, 8, -42, 0.799999, -42, -28.9, -28, -41.9, -28, -44, 28, -44 )
 
 [node name="Collision0" type="CollisionPolygon2D" parent="."]
-position = Vector2( 102.225, -0.466782 )
-polygon = PoolVector2Array( -72, -41.9, -58, -28.9, -58, 2, -60.3, 2, -76, 14, -66, 23.1, -66, 34, -68.2, 34, -78, 42.9, -78, 48.8, -81.2, 52, -95.2, 52, -97.2, 48, -102, 48, -102, 49.7, -117.9, 52, -120, 52, -120, 49, -121.5, 44, -122.8, 44, -134, 32.8, -134, 23.2, -125.1, 13.5, -129, 8, -134.8, 8, -142, 0.799999, -142, -28.9, -128, -41.9, -128, -44, -72, -44 )
+position = Vector2( -0.831868, 2.68967 )
+scale = Vector2( 0.945013, 0.945013 )
+polygon = PoolVector2Array( 28, -41.9, 42, -28.9, 42, 2, 39.7, 2, 24, 14, 34, 23.1, 34, 34, 31.9, 34, 14.9, 52, -16, 52, -16, 49.8, -23.8, 42, -24.5, 42, -32, 45, -32, 41.9, -51, 24.9, -51, 18, -48.5, 18, -41, 15, -41, 18.1, -38, 20.5, -38, 18, -29, 18, -24, 14, -28.9, 8, -34.8, 8, -42, 0.799999, -42, -28.9, -28, -41.9, -28, -44, 28, -44 )
