@@ -5,7 +5,9 @@ const MAX_POSITION_DIFF = 10
 
 # Subfolders
 const PENGUIN_SUBFOLDER = "penguin"
+const OTHER_PLAYERS_SUBFOLDER = "other_players"
 const ACCESSORIES_SUBFOLDER = "accessories"
+const PLAYER_SUBFOLDERS = [PENGUIN_SUBFOLDER, OTHER_PLAYERS_SUBFOLDER]
 
 export var g_selected = false
 export var g_subfolder = PENGUIN_SUBFOLDER
@@ -47,7 +49,7 @@ func _ready():
 
 # Differentiate between tap and scroll
 func _on_gui_input(event):
-	if (g_selected and g_subfolder == PENGUIN_SUBFOLDER) or self.texture == g_locked_texture:
+	if (g_selected and PLAYER_SUBFOLDERS.has(g_subfolder)) or self.texture == g_locked_texture:
 		return
 
 	if event is InputEventMouseButton and event.pressed:
@@ -112,13 +114,13 @@ class WhichUnlock:
 		return score
 		
 	func get_selected(name):
-		if g_subfolder == PENGUIN_SUBFOLDER:
+		if PLAYER_SUBFOLDERS.has(g_subfolder):
 			return Settings.unlock_node_to_unlockable(name) == Settings.get_player()
 		elif g_subfolder == ACCESSORIES_SUBFOLDER:
 			return Settings.unlock_node_to_unlockable(name) == Settings.get_accessory()
 			
 	func update_settings(name):
-		if name and g_subfolder == PENGUIN_SUBFOLDER:
+		if name and PLAYER_SUBFOLDERS.has(g_subfolder):
 			Settings.set_player(Settings.unlock_node_to_unlockable(name))
 		elif g_subfolder == ACCESSORIES_SUBFOLDER:
 			return Settings.set_accessory(Settings.unlock_node_to_unlockable(name))

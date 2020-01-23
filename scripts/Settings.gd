@@ -21,7 +21,8 @@ enum Player {
 	PINK,
 	PURPLE,
 	TEAL,
-	YELLOW
+	YELLOW,
+	CAT
 }
 
 var g_unlock_node_to_accessory = {
@@ -42,7 +43,8 @@ var g_unlock_node_to_player = {
 	"PenguinPink": Player.PINK,
 	"PenguinPurple": Player.PURPLE,
 	"PenguinTeal": Player.TEAL,
-	"PenguinYellow": Player.YELLOW
+	"PenguinYellow": Player.YELLOW,
+	"Cat": Player.CAT
 }
 
 var g_player_to_resource = {
@@ -52,7 +54,9 @@ var g_player_to_resource = {
 	Player.PINK: "res://assets/sprites/players/PenguinPink.png",
 	Player.PURPLE: "res://assets/sprites/players/PenguinPurple.png",
 	Player.TEAL: "res://assets/sprites/players/PenguinTeal.png",
-	Player.YELLOW: "res://assets/sprites/players/PenguinYellow.png"
+	Player.YELLOW: "res://assets/sprites/players/PenguinYellow.png",
+	# TODO: update this!
+	Player.CAT: "res://assets/sprites/players/Cat.png"
 }
 
 var g_accessory = Accessory.NONE

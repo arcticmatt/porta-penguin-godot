@@ -45,31 +45,31 @@ func save_unlocks_player(player):
 
 func get_accessory():
 	var first_line = _get_first_line(UNLOCKS_FILE)
-	if not first_line:
+	if not first_line or not first_line.has("accessory"):
 		return Settings.Accessory.NONE
 	return int(first_line["accessory"])
 	
 func get_cumulative_score():
 	var first_line = _get_first_line(SCORE_FILE)
-	if not first_line:
+	if not first_line or not first_line.has("cumulative_score"):
 		return 0
 	return int(first_line["cumulative_score"])
 
 func get_highscore():
 	var first_line = _get_first_line(SCORE_FILE)
-	if not first_line:
+	if not first_line or not first_line.has("highscore"):
 		return 0
 	return int(first_line["highscore"])
 	
 func get_num_times_instructions_shown():
 	var first_line = _get_first_line(NUM_TIMES_INSTRUCTIONS_SHOWN_FILE)
-	if not first_line:
+	if not first_line or not first_line.has("num_times"):
 		return 0
 	return int(first_line["num_times"])
 
 func get_player():
 	var first_line = _get_first_line(UNLOCKS_FILE)
-	if not first_line:
+	if not first_line or not first_line.has("player"):
 		return Settings.Player.DEFAULT
 	return int(first_line["player"])
 

@@ -74,7 +74,6 @@ func score():
 		_update_for_current_level()
 
 func _update_for_current_level():
-	print("updating for current level!")
 	$CharacterPool.use_params(Levels.get_current_character_pool_params())
 	$SucculentPool.use_params(Levels.get_current_succulent_pool_params())
 	$PowerPool.use_params(Levels.get_current_power_pool_params())

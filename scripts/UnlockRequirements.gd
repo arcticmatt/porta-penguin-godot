@@ -32,7 +32,8 @@ const PLAYER_REQUIREMENTS = {
 	Settings.Player.PINK: 150,
 	Settings.Player.PURPLE: 200,
 	Settings.Player.TEAL: 250,
-	Settings.Player.YELLOW: 300
+	Settings.Player.YELLOW: 300,
+	Settings.Player.CAT: 700
 }
 
 # Called when the node enters the scene tree for the first time.
