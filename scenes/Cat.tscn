@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/Penguin.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/players/Penguin.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/players/Cat.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/unlocks/accessories/StrawHat.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/unlocks/accessories/Noogler.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/unlocks/accessories/Burger.png" type="Texture" id=5]
@@ -84,6 +84,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "Flap"
+step = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -106,7 +107,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 42.453, -45 ), Vector2( 42.4534, -34.9576 ) ]
+"values": [ Vector2( 6.889, -9 ), Vector2( 6.861, -7.431 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Noogler:position")
@@ -118,7 +119,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 53.939, -42 ), Vector2( 53.939, -36 ) ]
+"values": [ Vector2( 8.50163, -8.00251 ), Vector2( 8.50163, -8.00251 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Burger:position")
@@ -130,7 +131,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 42.594, -42 ), Vector2( 42.594, -37 ) ]
+"values": [ Vector2( 6.99085, -8.00231 ), Vector2( 6.99085, -8.02277 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Chef:position")
@@ -142,7 +143,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 42.594, -46.5 ), Vector2( 42.594, -41.75 ) ]
+"values": [ Vector2( 6.99242, -8.9812 ), Vector2( 6.99242, -8.9812 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Crown:position")
@@ -154,7 +155,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 42.594, -37.15 ), Vector2( 42.594, -32.15 ) ]
+"values": [ Vector2( 7.00175, -6.88802 ), Vector2( 7.00175, -6.88802 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Mushroom:position")
@@ -166,7 +167,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 42.594, -49.4 ), Vector2( 42.594, -44.4 ) ]
+"values": [ Vector2( 6.99592, -8.48839 ), Vector2( 6.99592, -8.48839 ) ]
 }
 tracks/7/type = "value"
 tracks/7/path = NodePath("Rainbow:position")
@@ -178,7 +179,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 42.594, -39.5 ), Vector2( 42.594, -34.5 ) ]
+"values": [ Vector2( 6.99484, -7.40888 ), Vector2( 6.99484, -7.40888 ) ]
 }
 tracks/8/type = "value"
 tracks/8/path = NodePath("Santa:position")
@@ -190,7 +191,7 @@ tracks/8/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 33, -43.7 ), Vector2( 33, -38.7 ) ]
+"values": [ Vector2( 4.49021, -8.40487 ), Vector2( 4.49021, -8.40487 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -226,7 +227,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, 10 ), Vector2( 0, 15 ), Vector2( 0, 10 ), Vector2( 0, 5 ), Vector2( 0, 0 ), Vector2( 0, -5 ), Vector2( 0, -10 ), Vector2( 0, -15 ), Vector2( 0, -10 ), Vector2( 0, -5 ) ]
 }
 
-[node name="Penguin" type="RigidBody2D"]
+[node name="Cat" type="RigidBody2D"]
 pause_mode = 2
 position = Vector2( -1.61511, -1.20566 )
 collision_layer = 2
@@ -240,10 +241,9 @@ script = ExtResource( 1 )
 
 [node name="PlayerSprite" type="Sprite" parent="."]
 position = Vector2( 0, 4.73574 )
-scale = Vector2( 1.25, 1.25 )
+scale = Vector2( 5.5, 5.5 )
 texture = ExtResource( 2 )
 hframes = 3
-frame = 1
 
 [node name="IdleAnimationPlayer" type="AnimationPlayer" parent="PlayerSprite"]
 anims/Flap = SubResource( 1 )
@@ -257,60 +257,53 @@ anims/FlapLoop = SubResource( 5 )
 anims/Idling = SubResource( 6 )
 
 [node name="StrawHat" type="Sprite" parent="PlayerSprite"]
-position = Vector2( 42.453, -45 )
-scale = Vector2( 4.8, 4.8 )
+visible = false
+position = Vector2( 6.861, -7.431 )
 texture = ExtResource( 3 )
 
 [node name="Noogler" type="Sprite" parent="PlayerSprite"]
 visible = false
-position = Vector2( 53.939, -42 )
-scale = Vector2( 4.8, 4.8 )
+position = Vector2( 8.50163, -8.00251 )
 texture = ExtResource( 4 )
 
 [node name="Burger" type="Sprite" parent="PlayerSprite"]
 visible = false
-position = Vector2( 42.594, -42 )
-scale = Vector2( 4.8, 4.8 )
+position = Vector2( 6.99085, -8.02277 )
 texture = ExtResource( 5 )
 
 [node name="Chef" type="Sprite" parent="PlayerSprite"]
 visible = false
-position = Vector2( 42.594, -46.5 )
-scale = Vector2( 4.8, 4.8 )
+position = Vector2( 6.99242, -8.9812 )
 texture = ExtResource( 6 )
 
 [node name="Crown" type="Sprite" parent="PlayerSprite"]
 visible = false
-position = Vector2( 42.594, -37.15 )
-scale = Vector2( 4.8, 4.8 )
+position = Vector2( 7.00175, -6.88802 )
 texture = ExtResource( 7 )
 
 [node name="Mushroom" type="Sprite" parent="PlayerSprite"]
 visible = false
-position = Vector2( 42.594, -49.4 )
-scale = Vector2( 4.8, 4.8 )
+position = Vector2( 6.99592, -8.48839 )
 texture = ExtResource( 8 )
 
 [node name="Rainbow" type="Sprite" parent="PlayerSprite"]
 visible = false
-position = Vector2( 42.594, -39.5 )
-scale = Vector2( 4.8, 4.8 )
+position = Vector2( 6.99484, -7.40888 )
 texture = ExtResource( 9 )
 
 [node name="Santa" type="Sprite" parent="PlayerSprite"]
 visible = false
-position = Vector2( 33, -43.7 )
-scale = Vector2( 4.8, 4.8 )
+position = Vector2( 4.49021, -8.40487 )
 texture = ExtResource( 10 )
 
 [node name="PoopPoint" type="Node2D" parent="."]
-position = Vector2( -65.5865, 39.922 )
+position = Vector2( -35.4809, 30.9764 )
 
 [node name="Collision0" type="CollisionPolygon2D" parent="."]
 visible = false
 position = Vector2( 192.978, 2.10751 )
 scale = Vector2( 1.25, 1.25 )
-polygon = PoolVector2Array( -105.5, -34, -104.3, -31.5, -95.5, -31.5, -95.5, -29.2, -89.5, -21.5, -81.1, -21.5, -79.1, -16.5, -76.7, -16.5, -73.5, -13.3, -73.5, -5.7, -88.5, -3.7, -88.5, -1.5, -103.5, 10.5, -103.5, 28.9, -108.5, 30.9, -108.5, 33.3, -111.7, 36.5, -232.5, 36.5, -232.5, 18.5, -230.5, 18.5, -223.5, 8.5, -221.5, 8.5, -221.5, 0.5, -219.4, 0.5, -203.4, -16.5, -141.5, -16.5, -141.5, -19.5, -139.3, -19.5, -124.5, -34.3, -124.5, -36.5, -105.5, -36.5 )
+polygon = PoolVector2Array( -125.755, -25.9045, -118.527, -20.377, -106.409, -6.66449, -106.727, 0.776414, -125.861, 17.8905, -114.168, 28.2014, -122.034, 35.7486, -128.412, 35.4297, -140.849, 23.3117, -178.054, 23.6306, -195.487, 36.3864, -206.01, 28.9455, -201.865, 22.355, -194.849, 18.2094, -194.49, 0.276597, -192.107, -5.32214, -199.612, -10.2062, -202.947, -12.8268, -202.352, -24.1434, -192.829, -30.9006, -186.133, -26.2234, -191.979, -16.5503, -177.416, -5.07001, -170.826, -27.6053, -155.944, -23.8849, -144.251, -9.32196, -141.7, -22.8219, -135.853, -26.8612 )
 
 [node name="PoopAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )

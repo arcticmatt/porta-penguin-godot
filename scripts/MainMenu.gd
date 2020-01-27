@@ -1,6 +1,7 @@
 extends MarginContainer
 
 var g_main_scene = preload("res://scenes/Main.tscn")
+var g_player = null
 
 func _input(event):
 	# For testing
@@ -8,8 +9,10 @@ func _input(event):
 		_show_unlocks()
 
 func _ready():
+	_update_current_player()
+		
 	$HBoxMain/MarginLeft/VBoxText/Highscore.text = "Highscore: " + str(Save.get_highscore())
-	$Penguin/PenguinSprite/IdleAnimationPlayer.play("Idling", -1, 2)
+	g_player.get_node("PlayerSprite/IdleAnimationPlayer").play("Idling", -1, 2)
 
 func _on_Play_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
@@ -29,11 +32,24 @@ func _show_unlocks():
 	$CharacterPool.hide_all()
 
 func hide_unlocks():
-	$Penguin.update_texture()
-	$Penguin.update_accessory()
-	$Penguin/PenguinSprite/IdleAnimationPlayer.play("Idling", -1, 2)
 	for node in get_tree().get_nodes_in_group("MainMenuMain"):
 		node.visible = true
 	for node in get_tree().get_nodes_in_group("MainMenuUnlocks"):
 		node.visible = false
 	$CharacterPool.show_all()
+	
+	_update_current_player()
+		
+	g_player.update_texture()
+	g_player.update_accessory()
+	g_player.get_node("PlayerSprite/IdleAnimationPlayer").play("Idling", -1, 2)
+
+func _update_current_player():
+	if Settings.get_player() == Settings.Player.CAT:
+		$Penguin.visible = false
+		$Cat.visible = true
+		g_player = $Cat
+	else:
+		$Penguin.visible = true
+		$Cat.visible = false
+		g_player = $Penguin

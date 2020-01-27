@@ -7,12 +7,21 @@ const SHOW_RESTART_DELAY_MSECS = 750
 var g_game_over = false
 var g_game_over_msecs = null
 
+var g_player = null
+
 func _ready():
+	if Settings.get_player() == Settings.Player.CAT:
+		remove_child($Penguin)
+		g_player = $Cat
+	else:
+		remove_child($Cat)
+		g_player = $Penguin
+
 	# Top
 	_add_wall(Vector2(0, -10), Vector2(1600, 10))
 	# Bottom, covers grass
 	_add_wall(Vector2(0, 900), Vector2(1600, 70))
-	$Penguin.connect("signal_penguin_dead", self, "game_over")
+	g_player.connect("signal_penguin_dead", self, "game_over")
 	get_tree().paused = true
 	g_game_over_msecs = null
 	_update_for_current_level()
@@ -61,7 +70,7 @@ func game_over(game_over_text):
 	else:
 		$CenterContainer/VBoxContainer/DeathLabel.text = game_over_text
 	g_game_over = true
-	$Penguin.penguin_game_over()
+	g_player.penguin_game_over()
 	Save.save_score($ScoreLabel.g_score)
 	Levels.reset_current_level()
 	$MainMenuLabel.visible = true

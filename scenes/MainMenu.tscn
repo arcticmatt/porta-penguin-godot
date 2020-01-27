@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Pixeled.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://scenes/Penguin.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/sprites/Background.png" type="Texture" id=4]
-[ext_resource path="res://scripts/Background.gd" type="Script" id=5]
-[ext_resource path="res://scripts/ObjectPool.gd" type="Script" id=6]
-[ext_resource path="res://scenes/Unlocks.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Cat.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Penguin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sprites/Background.png" type="Texture" id=5]
+[ext_resource path="res://scripts/Background.gd" type="Script" id=6]
+[ext_resource path="res://scripts/ObjectPool.gd" type="Script" id=7]
+[ext_resource path="res://scenes/Unlocks.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 70
@@ -19,6 +20,23 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
 [sub_resource type="Animation" id=3]
+length = 8.0
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5, 6, 7, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -110.939, 540.482 ), Vector2( 184.049, 241.397 ), Vector2( 365.197, 546.335 ), Vector2( 568.538, 268.808 ), Vector2( 721.484, 530 ), Vector2( 873.919, 289.903 ), Vector2( 1111.03, 550 ), Vector2( 1319.45, 298.195 ), Vector2( 1707.33, 481.894 ) ]
+}
+
+[sub_resource type="Animation" id=4]
 length = 8.0
 loop = true
 step = 0.5
@@ -117,9 +135,19 @@ margin_bottom = 825.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Penguin" parent="." groups=[
+[node name="Cat" parent="." groups=[
 "MainMenuMain",
 ] instance=ExtResource( 3 )]
+position = Vector2( 410.391, 512.744 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cat"]
+autoplay = "Fly"
+playback_speed = 0.4
+anims/Fly = SubResource( 3 )
+
+[node name="Penguin" parent="." groups=[
+"MainMenuMain",
+] instance=ExtResource( 4 )]
 position = Vector2( -110.939, 540.482 )
 sleeping = true
 disable_input = true
@@ -127,34 +155,34 @@ disable_input = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Penguin"]
 autoplay = "Fly"
 playback_speed = 0.4
-anims/Fly = SubResource( 3 )
+anims/Fly = SubResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
 
 [node name="Background1" type="Sprite" parent="CanvasLayer"]
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 centered = false
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Background2" type="Sprite" parent="CanvasLayer"]
 position = Vector2( 1600, 0 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 centered = false
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="CharacterPool" type="Node2D" parent="."]
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 g_path = "res://scenes/characters/"
 g_min_spawn_wait_ms = 500
 g_max_spawn_wait_ms = 1000
 
 [node name="Unlocks" parent="." groups=[
 "MainMenuUnlocks",
-] instance=ExtResource( 7 )]
+] instance=ExtResource( 8 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
