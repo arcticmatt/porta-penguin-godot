@@ -21,7 +21,7 @@ func _ready():
 	_add_wall(Vector2(0, -10), Vector2(1600, 10))
 	# Bottom, covers grass
 	_add_wall(Vector2(0, 900), Vector2(1600, 70))
-	g_player.connect("signal_penguin_dead", self, "game_over")
+	g_player.connect("signal_player_dead", self, "game_over")
 	get_tree().paused = true
 	g_game_over_msecs = null
 	_update_for_current_level()
@@ -70,7 +70,7 @@ func game_over(game_over_text):
 	else:
 		$CenterContainer/VBoxContainer/DeathLabel.text = game_over_text
 	g_game_over = true
-	g_player.penguin_game_over()
+	g_player.player_game_over()
 	Save.save_score($ScoreLabel.g_score)
 	Levels.reset_current_level()
 	$MainMenuLabel.visible = true

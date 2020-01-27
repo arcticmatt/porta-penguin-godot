@@ -25,7 +25,7 @@ func get_height():
 	return texture.get_size().y * $AnimatedSprite.scale.y
 	
 func _on_body_entered(body):
-	# Penguin 
+	# Penguin (or Cat, or another player)
 	if body.get_collision_layer_bit(1):
 		visible = false
 		if body.has_method('use_power'):

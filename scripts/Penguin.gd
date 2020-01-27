@@ -29,10 +29,7 @@ var g_min_poop_rate_ms = DEFAULT_POOP_RATE_MS
 var g_last_poop_ms = 0
 
 # Signals
-signal signal_penguin_dead
-
-# TODO: should refactor names so that they're not so "penguin" specific, now
-# that you can play as another animal (a cat).
+signal signal_player_dead
 
 func _ready():
 	update_accessory()
@@ -48,13 +45,13 @@ func _input(event):
 
 	if event is InputEventKey:
 		if event.is_action_pressed("ui_select"):
-			_penguin_jump()
+			_player_jump()
 		elif event.is_action_pressed("ui_down"):
-			_penguin_poop()
+			_player_poop()
 	if event is InputEventScreenTouch and event.pressed:
 		var position = event.position
 		if position.x < ProjectSettings.get_setting("display/window/size/width") / 2:
-			_penguin_jump()
+			_player_jump()
 
 # So we can hold down to poop
 func _process_input():
@@ -62,7 +59,7 @@ func _process_input():
 		return
 
 	if use_poop_button and $ButtonRight.is_pressed():
-		_penguin_poop()
+		_player_poop()
 
 func _fill_poop_pool():
 	for i in range(g_num_poops):
@@ -78,14 +75,14 @@ func _process(delta):
 		if power_duration >= g_max_power_duration_time_secs:
 			_lose_all_powers()
 	
-func _penguin_jump():
+func _player_jump():
 	set_linear_velocity(Vector2(0, 0))
 	apply_central_impulse(Vector2(0, UP_IMPULSE))
 	$PlayerSprite/FlapAnimationPlayer.stop()
 	$PlayerSprite/IdleAnimationPlayer.stop()
 	$PlayerSprite/FlapAnimationPlayer.play("Flap", -1, 1)
 
-func _penguin_poop():
+func _player_poop():
 	var time_diff = OS.get_system_time_msecs() - g_last_poop_ms
 	if time_diff < g_min_poop_rate_ms:
 		return
@@ -97,11 +94,11 @@ func _penguin_poop():
 		position + $PoopPoint.position, 
 		g_poop_scale)
 	$PoopAudioPlayer.play()
-
-func _on_PenguinRigidBody_body_entered(body):
-	emit_signal("signal_penguin_dead", Constants.HIT_SOMETHING)
 	
-func penguin_game_over():
+func _on_PlayerRigidBody_body_entered(body):
+	emit_signal("signal_player_dead", Constants.HIT_SOMETHING)
+	
+func player_game_over():
 	$PlayerSprite/FlapAnimationPlayer.stop()
 	g_dead = true
 	$PlayerSprite.frame = 2
