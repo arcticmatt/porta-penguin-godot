@@ -9,6 +9,8 @@ var g_game_over_msecs = null
 
 var g_player = null
 
+var g_character_pool = null
+
 func _ready():
 	if Settings.get_player() == Settings.Player.CAT:
 		remove_child($Penguin)
@@ -24,6 +26,18 @@ func _ready():
 	g_player.connect("signal_player_dead", self, "game_over")
 	get_tree().paused = true
 	g_game_over_msecs = null
+
+	if Settings.get_trump_mode():
+		var character_pool_res = load("res://scripts/ObjectPool.gd")
+		g_character_pool = character_pool_res.new()
+		g_character_pool.init("res://scenes/characters_trump/", 860, 860, 1700, 12)
+		add_child(g_character_pool)
+	else:
+		var character_pool_res = load("res://scripts/ObjectPool.gd")
+		g_character_pool = character_pool_res.new()
+		g_character_pool.init("res://scenes/characters/", 860, 860, 1700, 2)
+		add_child(g_character_pool)
+	
 	_update_for_current_level()
 	
 func _process(delta):
@@ -83,7 +97,7 @@ func score():
 		_update_for_current_level()
 
 func _update_for_current_level():
-	$CharacterPool.use_params(Levels.get_current_character_pool_params())
+	g_character_pool.use_params(Levels.get_current_character_pool_params())
 	$SucculentPool.use_params(Levels.get_current_succulent_pool_params())
 	$PowerPool.use_params(Levels.get_current_power_pool_params())
 

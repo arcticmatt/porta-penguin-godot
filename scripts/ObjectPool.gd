@@ -18,6 +18,13 @@ var g_object_pool = []
 var g_object_pool_available = []
 var g_max_available_objects = 0
 
+func init(path, min_y, max_y, starting_x, copies_of_each):
+	g_path = path
+	g_min_y = min_y
+	g_max_y = max_y
+	g_starting_x = starting_x
+	g_copies_of_each = copies_of_each
+
 func use_params(params):
 	g_min_spawn_wait_ms = params.min_spawn_wait_ms
 	g_max_spawn_wait_ms = params.max_spawn_wait_ms

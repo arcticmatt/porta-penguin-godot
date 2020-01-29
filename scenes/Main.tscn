@@ -155,12 +155,6 @@ custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 align = 1
 
-[node name="CharacterPool" type="Node2D" parent="."]
-visible = false
-position = Vector2( 1375.5, 802.409 )
-script = ExtResource( 6 )
-g_path = "res://scenes/characters/"
-
 [node name="SucculentPool" type="Node2D" parent="."]
 visible = false
 position = Vector2( 1375.5, 802.409 )

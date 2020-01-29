@@ -61,6 +61,7 @@ var g_player_to_resource = {
 
 var g_accessory = Accessory.NONE
 var g_player = Player.DEFAULT
+var g_trump_mode = false
 
 func _ready():
 	g_player = Save.get_player()
@@ -98,3 +99,12 @@ func get_player():
 
 func get_player_resource():
 	return g_player_to_resource[g_player]
+	
+func disable_trump_mode():
+	g_trump_mode = false
+
+func enable_trump_mode():
+	g_trump_mode = true
+
+func get_trump_mode():
+	return true
