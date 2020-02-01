@@ -16,6 +16,7 @@ func _ready():
 
 func _on_Play_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
+		Settings.disable_trump_mode()
 		MusicPlayer.play()
 		get_tree().change_scene_to(g_main_scene)
 

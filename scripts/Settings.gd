@@ -107,4 +107,4 @@ func enable_trump_mode():
 	g_trump_mode = true
 
 func get_trump_mode():
-	return true
+	return g_trump_mode

@@ -1,16 +1,26 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/Splash.gd" type="Script" id=1]
-[ext_resource path="res://assets/splash/Generic1600x900.png" type="Texture" id=2]
+[ext_resource path="res://assets/splash/Generic1600x900Frame1.png" type="Texture" id=2]
+[ext_resource path="res://assets/splash/Generic1600x900Frame2.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-centered = false
-
 [node name="Timer" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 2.0
 autostart = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+speed_scale = 0.5
+centered = false
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
