@@ -38,9 +38,11 @@ func use_params(params):
 
 func _ready():
 	var files = _list_files_in_directory(g_path)
+	var dir = Directory.new()
 	for file in files:
 		var full_path = g_path + file
-		
+		if not dir.file_exists(full_path):
+			full_path = file
 		for i in range(g_copies_of_each):
 			var object = load(full_path).instance()
 			object.global_position = _get_random_global_position(object)
@@ -51,8 +53,14 @@ func _ready():
 	g_max_available_objects = g_object_pool.size()
 	
 func _list_files_in_directory(path):
+	
 	var files = []
 	var dir = Directory.new()
+	
+	# If path is not a directory, just use it
+	if not dir.dir_exists(path):
+		return [path]
+
 	dir.open(path)
 	dir.list_dir_begin()
 

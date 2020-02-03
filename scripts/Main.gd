@@ -34,7 +34,7 @@ func _ready():
 	if Settings.is_trump_mode_enabled():
 		var character_pool_res = load("res://scripts/ObjectPool.gd")
 		g_character_pool = character_pool_res.new()
-		g_character_pool.init("res://scenes/characters_trump/", 860, 860, 1700, 12)
+		g_character_pool.init("res://scenes/characters/Trump.tscn", 860, 860, 1700, 12)
 		add_child(g_character_pool)
 	else:
 		var character_pool_res = load("res://scripts/ObjectPool.gd")
