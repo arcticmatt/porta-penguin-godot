@@ -3,7 +3,17 @@ extends Node
 # Save files
 const SCORE_FILE = "user://score.save"
 const NUM_TIMES_INSTRUCTIONS_SHOWN_FILE = "user://instructions.save"
+const TRUMP_SCORE_FILE = "user://trump_score.save"
 const UNLOCKS_FILE = "user://unlocks.save"
+
+func add_to_trump_score(additional_score):
+	var current_trump_score = get_trump_score()
+	var file = File.new()
+	file.open(TRUMP_SCORE_FILE, File.WRITE)
+	var dict = {
+		"trump_score": current_trump_score + additional_score
+	}
+	file.store_line(to_json(dict))
 
 func save_num_times_instructions_shown(num_times):
 	var save_instructions = File.new()
@@ -72,6 +82,12 @@ func get_player():
 	if not first_line or not first_line.has("player"):
 		return Settings.Player.DEFAULT
 	return int(first_line["player"])
+
+func get_trump_score():
+	var first_line = _get_first_line(TRUMP_SCORE_FILE)
+	if not first_line or not first_line.has("trump_score"):
+		return 0
+	return int(first_line["trump_score"])
 
 func _get_first_line(filename):
 	var file = File.new()

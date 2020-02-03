@@ -11,6 +11,8 @@ var g_player = null
 
 var g_character_pool = null
 
+var g_per_round_trump_score = 0
+
 func _ready():
 	if Settings.get_player() == Settings.Player.CAT:
 		remove_child($Penguin)
@@ -18,6 +20,8 @@ func _ready():
 	else:
 		remove_child($Cat)
 		g_player = $Penguin
+		
+	g_per_round_trump_score = 0
 
 	# Top
 	_add_wall(Vector2(0, -10), Vector2(1600, 10))
@@ -27,7 +31,7 @@ func _ready():
 	get_tree().paused = true
 	g_game_over_msecs = null
 
-	if Settings.get_trump_mode():
+	if Settings.is_trump_mode_enabled():
 		var character_pool_res = load("res://scripts/ObjectPool.gd")
 		g_character_pool = character_pool_res.new()
 		g_character_pool.init("res://scenes/characters_trump/", 860, 860, 1700, 12)
@@ -86,6 +90,8 @@ func game_over(game_over_text):
 	g_game_over = true
 	g_player.player_game_over()
 	Save.save_score($ScoreLabel.g_score)
+	print('adding %s to trump score' % g_per_round_trump_score)
+	Save.add_to_trump_score(g_per_round_trump_score)
 	Levels.reset_current_level()
 	$MainMenuLabel.visible = true
 
@@ -104,3 +110,8 @@ func _update_for_current_level():
 func _on_RestartLabel_gui_input(event):
 	if event is InputEventMouseButton and event.pressed and g_game_over:
 		get_tree().reload_current_scene()
+		
+# Used to keep track of the Trump score per round, so we only have to write to the file at the
+# end.
+func increment_trump_score():
+	g_per_round_trump_score += 1

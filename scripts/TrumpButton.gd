@@ -4,7 +4,10 @@ var g_main_scene = preload("res://scenes/Main.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	if UnlockRequirements.is_trump_mode_unlocked():
+		visible = true
+	else:
+		visible = false
 
 func _on_TrumpButton_pressed():
 	Settings.enable_trump_mode()

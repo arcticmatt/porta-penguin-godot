@@ -4,6 +4,8 @@ extends Node
 # Contains requirements needed to unlock players, accesories, etc.
 #
 
+const TRUMP_SCORE_REQUIRED = 1
+
 enum UnlockType {
 	PLAYER,
 	ACCESSORY
@@ -85,3 +87,6 @@ func is_new_character_unlocked(additional_score):
 		return false
 	
 	return current_cumulative_score + additional_score >= PLAYER_REQUIREMENTS[current_key + 1]
+	
+func is_trump_mode_unlocked():
+	return Save.get_trump_score() >= TRUMP_SCORE_REQUIRED

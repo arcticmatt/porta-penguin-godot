@@ -25,6 +25,7 @@ func _on_Unlocks_gui_input(event):
 		_show_unlocks()
 			
 func _show_unlocks():
+	$TrumpButtonParent.visible = false
 	$Unlocks.enter()
 	for node in get_tree().get_nodes_in_group("MainMenuMain"):
 		node.visible = false
@@ -33,6 +34,7 @@ func _show_unlocks():
 	$CharacterPool.hide_all()
 
 func hide_unlocks():
+	$TrumpButtonParent.visible = true
 	for node in get_tree().get_nodes_in_group("MainMenuMain"):
 		node.visible = true
 	for node in get_tree().get_nodes_in_group("MainMenuUnlocks"):
