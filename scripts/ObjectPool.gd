@@ -53,12 +53,12 @@ func _ready():
 	g_max_available_objects = g_object_pool.size()
 	
 func _list_files_in_directory(path):
-	
 	var files = []
 	var dir = Directory.new()
 	
-	# If path is not a directory, just use it
-	if not dir.dir_exists(path):
+	# If path is not a directory, just use it.
+	# Don't use dir.dir_exists b/c it doesn't work on mobile.
+	if path.ends_with('.tscn'):
 		return [path]
 
 	dir.open(path)
