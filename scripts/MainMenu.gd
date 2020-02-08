@@ -9,6 +9,9 @@ func _input(event):
 		_show_unlocks()
 
 func _ready():
+	MusicPlayer.load_intro_song()
+	MusicPlayer.play()
+	
 	_update_current_player()
 		
 	$HBoxMain/MarginLeft/VBoxText/Highscore.text = "Highscore: " + str(Save.get_highscore())
@@ -17,6 +20,7 @@ func _ready():
 func _on_Play_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		Settings.disable_trump_mode()
+		MusicPlayer.load_main_song()
 		MusicPlayer.play()
 		get_tree().change_scene_to(g_main_scene)
 
