@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/Background.png" type="Texture" id=2]
@@ -58,6 +58,27 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="DynamicFont" id=10]
+size = 48
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=11]
+resource_name = "Blink"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
 [sub_resource type="DynamicFont" id=5]
 size = 60
 outline_color = Color( 0, 0, 0, 1 )
@@ -83,6 +104,34 @@ tracks/0/keys = {
 size = 40
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 40
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "TextAnimation"
+length = 20.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 4.4, 5, 5.6, 6.2, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9, 11, 11.1, 11.7, 12.3, 17 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "", "e", "ev", "eve", "ever", "ever ", "ever w", "ever wa", "ever wan", "ever want", "ever wante", "ever wanted", "ever wanted ", "ever wanted t", "ever wanted to", "ever wanted to ", "ever wanted to p", "ever wanted to po", "ever wanted to poo", "ever wanted to poop", "ever wanted to poop ", "ever wanted to poop o", "ever wanted to poop on", "ever wanted to poop on ", "ever wanted to poop on t", "ever wanted to poop on tr", "ever wanted to poop on tru", "ever wanted to poop on trum", "ever wanted to poop on trump", "ever wanted to poop on trump?
+", "ever wanted to poop on trump?
+.", "ever wanted to poop on trump?
+..", "ever wanted to poop on trump?
+...", "", "n", "no", "now", "now ", "now y", "now yo", "now you", "now you ", "now you c", "now you ca", "now you can", "now you can
+:", "now you can
+:)", "" ]
+}
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -186,7 +235,7 @@ shape_centered = false
 shape_visible = false
 
 [node name="Penguin" parent="." instance=ExtResource( 9 )]
-position = Vector2( 231.95, 330.267 )
+position = Vector2( 222.977, 330.71 )
 use_poop_button = true
 
 [node name="ButtonRight" type="TouchScreenButton" parent="Penguin"]
@@ -196,6 +245,7 @@ shape_centered = false
 shape_visible = false
 
 [node name="ScoreLabel" type="Label" parent="."]
+visible = false
 margin_left = 1258.8
 margin_top = -1.0
 margin_right = 1557.8
@@ -214,14 +264,17 @@ script = ExtResource( 11 )
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 1600.0
+margin_bottom = 900.0
 rect_min_size = Vector2( 1600, 900 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 12 )
+g_always_show_instructions = true
 
 [node name="LeftControl" type="Label" parent="ControlsContainer"]
 margin_top = 366.0
-margin_right = 798.0
+margin_right = 786.0
 margin_bottom = 534.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 3 )
@@ -231,11 +284,31 @@ align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ControlsContainer/LeftControl"]
 autoplay = "Blink"
-playback_speed = 0.5
+playback_speed = 0.6
 anims/Blink = SubResource( 4 )
 
+[node name="Separator" type="Label" parent="ControlsContainer"]
+margin_left = 790.0
+margin_right = 809.0
+margin_bottom = 825.0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "|
+|
+|
+|
+|
+|"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ControlsContainer/Separator"]
+autoplay = "Blink"
+playback_speed = 0.6
+anims/Blink = SubResource( 11 )
+
 [node name="RightControl" type="Label" parent="ControlsContainer"]
-margin_left = 802.0
+margin_left = 813.0
 margin_top = 366.0
 margin_right = 1600.0
 margin_bottom = 534.0
@@ -247,7 +320,7 @@ align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ControlsContainer/RightControl"]
 autoplay = "Blink"
-playback_speed = 0.5
+playback_speed = 0.6
 anims/Blink = SubResource( 6 )
 
 [node name="MainMenuLabel" type="Label" parent="."]
@@ -264,5 +337,23 @@ script = ExtResource( 13 )
 
 [node name="SquishAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 14 )
+
+[node name="DummyLabel2" type="Label" parent="."]
+pause_mode = 2
+margin_left = -0.81543
+margin_top = 162.165
+margin_right = 1595.11
+margin_bottom = 389.165
+grow_vertical = 0
+rect_min_size = Vector2( 850, 200 )
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DummyLabel2"]
+pause_mode = 2
+anims/TextAnimation = SubResource( 9 )
 [connection signal="gui_input" from="CenterContainer/VBoxContainer/HBoxContainer/RestartLabel" to="." method="_on_RestartLabel_gui_input"]
 [connection signal="gui_input" from="MainMenuLabel" to="MainMenuLabel" method="_on_MainMenuLabel_gui_input"]
