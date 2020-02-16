@@ -26,7 +26,7 @@ func _ready():
 	# Top
 	_add_wall(Vector2(0, -10), Vector2(1600, 10))
 	# Bottom, covers grass
-	_add_wall(Vector2(0, 900), Vector2(1600, 70))
+	_add_wall(Vector2(0, 900), Vector2(1600, 50))
 	g_player.connect("signal_player_dead", self, "game_over")
 	get_tree().paused = true
 	g_game_over_msecs = null

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Background.png-4e7706ef682cc0d3d504c310fedc1216.stex"
+path="res://.import/PinkBackground.png-1229611ebb8244fe702dd71c7d9fc837.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Background.png"
-dest_files=[ "res://.import/Background.png-4e7706ef682cc0d3d504c310fedc1216.stex" ]
+source_file="res://assets/sprites/backgrounds/PinkBackground.png"
+dest_files=[ "res://.import/PinkBackground.png-1229611ebb8244fe702dd71c7d9fc837.stex" ]
 
 [params]
 

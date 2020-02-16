@@ -6,7 +6,7 @@
 [ext_resource path="res://scripts/TrumpButton.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Cat.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Penguin.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/sprites/Background.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/backgrounds/PinkBackground.png" type="Texture" id=7]
 [ext_resource path="res://scripts/Background.gd" type="Script" id=8]
 [ext_resource path="res://scripts/ObjectPool.gd" type="Script" id=9]
 [ext_resource path="res://scenes/Unlocks.tscn" type="PackedScene" id=10]
@@ -180,6 +180,7 @@ anims/Fly = SubResource( 4 )
 layer = -1
 
 [node name="Background1" type="Sprite" parent="CanvasLayer"]
+scale = Vector2( 10, 10 )
 texture = ExtResource( 7 )
 centered = false
 script = ExtResource( 8 )
@@ -189,6 +190,7 @@ __meta__ = {
 
 [node name="Background2" type="Sprite" parent="CanvasLayer"]
 position = Vector2( 1600, 0 )
+scale = Vector2( 10, 10 )
 texture = ExtResource( 7 )
 centered = false
 script = ExtResource( 8 )
