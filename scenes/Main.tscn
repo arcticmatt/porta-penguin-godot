@@ -270,7 +270,6 @@ rect_min_size = Vector2( 1600, 900 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 12 )
-g_always_show_instructions = true
 
 [node name="LeftControl" type="Label" parent="ControlsContainer"]
 margin_top = 366.0
