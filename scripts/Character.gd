@@ -41,9 +41,11 @@ func _on_body_entered(body):
 	if body.get_collision_layer_bit(3):
 		get_parent().get_node("SquishAudioPlayer").play()
 		$Sprite/AnimationPlayer.stop()
-		$Sprite.frame = 2
 		# If a "generic" character is pooped on, it's game over!
 		if g_is_generic:
 			get_parent().game_over(Constants.POOP_ON_GENERIC)
-		elif g_is_trump:
+		# Looking at $Sprite.frame accounts for laxative power
+		elif g_is_trump and $Sprite.frame != 2:
 			get_parent().increment_trump_score()
+		
+		$Sprite.frame = 2
