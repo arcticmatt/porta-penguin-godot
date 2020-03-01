@@ -4,7 +4,7 @@ extends Node
 # Contains requirements needed to unlock players, accesories, etc.
 #
 
-const TRUMP_SCORE_REQUIRED = 1
+const TRUMP_SCORE_REQUIRED = 15
 
 enum UnlockType {
 	PLAYER,

@@ -62,6 +62,9 @@ margin_right = 1600.0
 margin_bottom = -75.0
 mouse_filter = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxMain" type="HBoxContainer" parent="."]
 margin_right = 3200.0

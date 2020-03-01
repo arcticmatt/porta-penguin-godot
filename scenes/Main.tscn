@@ -245,7 +245,6 @@ shape_centered = false
 shape_visible = false
 
 [node name="ScoreLabel" type="Label" parent="."]
-visible = false
 margin_left = 1258.8
 margin_top = -1.0
 margin_right = 1557.8
