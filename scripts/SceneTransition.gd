@@ -11,4 +11,3 @@ func reload_current_scene(speed = 1.0):
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().reload_current_scene()
 	$AnimationPlayer.play("fade", -1, -1.0 * speed, true)
-	
