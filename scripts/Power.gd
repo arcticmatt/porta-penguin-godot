@@ -7,7 +7,7 @@ export var g_power_label = ""
 func _ready():
 	connect("body_entered", self, "_on_body_entered")
 
-func _process(delta):
+func _process(_delta):
 	position.x += g_velocity
 	
 func reset():

@@ -14,16 +14,16 @@ var running = false # have we started our thread?
 var queue = []
 var pending = {}
 
-func _lock(caller):
+func _lock(_caller):
 	mutex.lock()
 
-func _unlock(caller):
+func _unlock(_caller):
 	mutex.unlock()
 
-func _post(caller):
+func _post(_caller):
 	sem.post()
 
-func _wait(caller):
+func _wait(_caller):
 	sem.wait()
 
 func queue_resource(path, p_in_front = false):
@@ -140,7 +140,7 @@ func thread_process():
 	_unlock("process")
 
 
-func thread_func(u):
+func thread_func(_u):
 	running = true
 	while running:
 		thread_process()

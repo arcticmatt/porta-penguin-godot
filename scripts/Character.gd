@@ -17,7 +17,7 @@ func _ready():
 	if "Trump" in name:
 		g_is_trump = true
 
-func _process(delta):
+func _process(_delta):
 	position.x += g_velocity
 	
 func get_height():

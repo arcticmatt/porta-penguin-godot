@@ -7,7 +7,7 @@ var texture_width
 func _ready():
 	texture_width = texture.get_size().x * scale.x
 
-func _process(delta):
+func _process(_delta):
 	position.x += VELOCITY
 	_attempt_reposition()
 	

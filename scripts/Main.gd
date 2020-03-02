@@ -50,20 +50,16 @@ func _ready():
 	
 	get_tree().paused = true
 	
-func _process(delta):
+func _process(_delta):
 	if g_game_over_msecs and OS.get_system_time_msecs() - g_game_over_msecs > SHOW_RESTART_DELAY_MSECS:
 		$CenterContainer/VBoxContainer/HBoxContainer/RestartLabel.visible = true
 		$CenterContainer/VBoxContainer/HBoxContainer/DummyLabel.visible = false
 	
-func _input(event):
+func _input(_event):
 	if g_game_over_msecs and OS.get_system_time_msecs() - g_game_over_msecs < DISABLE_INPUT_MSECS:
 		return
 	else:
 		$ControlsContainer.visible = false
-		
-	# For video recording
-	if $CenterContainer/VBoxContainer/HBoxContainer/RestartLabel.visible and event.is_action_pressed("restart"):
-		get_tree().reload_current_scene()
 
 func _add_wall(position, size):
 	var rect = RectangleShape2D.new()

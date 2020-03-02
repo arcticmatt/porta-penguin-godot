@@ -34,11 +34,8 @@ func use_params(params):
 	g_max_spawn_wait_ms = params.max_spawn_wait_ms
 	g_object_velocity = params.object_velocity
 	disabled = params.disabled
-	# Update speed of objects that are currently on screen
-	for object in g_object_pool:
-		var x = object.global_position.x
-		#if x > LEFT_BOUND and x < g_starting_x:
-			#object.update_velocity(g_object_velocity)
+	# Note: don't update speed of objects that are currently on screen,
+	# it looks weird
 
 func _ready():
 	ResourceQueue.start()
@@ -55,7 +52,7 @@ func _ready():
 	
 	g_max_available_objects = files.size() * g_copies_of_each
 
-func _process(delta):
+func _process(_delta):
 	if disabled:
 		return
 	
@@ -112,7 +109,7 @@ func _list_files_in_directory(path):
 	
 func _add_to_available_objects():
 	for object in g_object_pool:
-		if object.global_position.x < LEFT_BOUND:
+		if object.is_inside_tree() and object.global_position.x < LEFT_BOUND:
 			object.global_position = _get_random_global_position(object)
 			object.reset()
 			g_object_pool_available.append(object)

@@ -6,7 +6,7 @@ var g_velocity = 0
 func _ready():
 	$CollisionPolygon2D.disabled = true
 
-func _process(delta):
+func _process(_delta):
 	position.x += g_velocity
 	
 func reset():

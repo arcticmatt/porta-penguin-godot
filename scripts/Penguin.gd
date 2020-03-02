@@ -62,13 +62,13 @@ func _process_input():
 		_player_poop()
 
 func _fill_poop_pool():
-	for i in range(g_num_poops):
+	for _i in range(g_num_poops):
 		var poop_object = g_poop_res.instance()
 		g_poop_pool.append(poop_object)
 		poop_object.deactivate()
 		get_parent().call_deferred("add_child", poop_object)
 
-func _process(delta):
+func _process(_delta):
 	_process_input()
 	if g_power_acquired != NONE_POWER:
 		var power_duration = OS.get_system_time_secs() - g_power_acquire_time_secs
@@ -95,7 +95,7 @@ func _player_poop():
 		g_poop_scale)
 	$PoopAudioPlayer.play()
 	
-func _on_PlayerRigidBody_body_entered(body):
+func _on_PlayerRigidBody_body_entered(_body):
 	emit_signal("signal_player_dead", Constants.HIT_SOMETHING)
 	
 func player_game_over():

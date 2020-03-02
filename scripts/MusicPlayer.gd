@@ -9,7 +9,7 @@ func load_intro_song():
 	self.stream = audio_file
 	self.stream.set_loop_mode(1)
 	self.stream.set_loop_end(self.stream.get_length() * self.stream.get_mix_rate())
-
+	
 func load_main_song():
 	var audio_file = load("res://assets/sounds/KkSloop.wav")
 	self.stream = audio_file
