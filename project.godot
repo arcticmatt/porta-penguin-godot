@@ -30,6 +30,8 @@ Settings="*res://scripts/Settings.gd"
 Utils="*res://scripts/Utils.gd"
 UnlockRequirements="*res://scripts/UnlockRequirements.gd"
 MusicPlayer="*res://scripts/MusicPlayer.gd"
+ResourceQueue="*res://scripts/ResourceQueue.gd"
+SceneTransition="*res://scenes/SceneTransition.tscn"
 
 [display]
 
@@ -92,4 +94,5 @@ pointing/emulate_touch_from_mouse=true
 [rendering]
 
 quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
 environment/default_environment="res://default_env.tres"
