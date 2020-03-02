@@ -18,6 +18,8 @@ var g_object_pool = []
 var g_object_pool_available = []
 var g_max_available_objects = 0
 
+var g_should_spawn = false
+
 var g_resources_to_get = []
 
 func init(path, min_y, max_y, starting_x, copies_of_each):
@@ -76,7 +78,7 @@ func _process(delta):
 			return
 	
 	var time_diff = OS.get_system_time_msecs() - g_last_spawn_time_ms
-	if time_diff > g_rand_spawn_wait_ms:
+	if time_diff > g_rand_spawn_wait_ms and g_should_spawn:
 		var available_object = _find_and_remove_available_object()
 		if available_object:
 			available_object.global_position = _get_random_global_position(available_object)

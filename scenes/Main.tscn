@@ -208,6 +208,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 align = 1
 
 [node name="SucculentPool" type="Node2D" parent="."]
+pause_mode = 2
 visible = false
 position = Vector2( 1375.5, 802.409 )
 script = ExtResource( 6 )
@@ -216,6 +217,7 @@ g_min_y = 100
 g_max_y = 700
 
 [node name="PowerPool" type="Node2D" parent="."]
+pause_mode = 2
 visible = false
 position = Vector2( 1375.5, 802.409 )
 script = ExtResource( 6 )
@@ -254,6 +256,9 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "0"
 align = 2
 script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Pauser" type="Node2D" parent="."]
 pause_mode = 2

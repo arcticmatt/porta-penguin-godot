@@ -8,6 +8,8 @@ func _input(event):
 		_show_unlocks()
 
 func _ready():
+	$CharacterPool.g_should_spawn = true
+	
 	MusicPlayer.load_intro_song()
 	MusicPlayer.play()
 	

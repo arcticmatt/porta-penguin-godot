@@ -12,3 +12,4 @@ func _input(event):
 	if (event is InputEventMouseButton and event.pressed) or event.is_action_pressed("ui_select"):
 		if not get_parent().g_game_over and get_tree().paused:
 			get_tree().paused = false
+			get_parent().on_unpause()

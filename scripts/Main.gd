@@ -31,21 +31,24 @@ func _ready():
 	# Bottom, covers grass
 	_add_wall(Vector2(0, 900), Vector2(1600, 50))
 	g_player.connect("signal_player_dead", self, "game_over")
-	get_tree().paused = true
 	g_game_over_msecs = null
 
 	if Settings.is_trump_mode_enabled():
 		var character_pool_res = load("res://scripts/ObjectPool.gd")
 		g_character_pool = character_pool_res.new()
 		g_character_pool.init("res://scenes/characters/Trump.tscn", 860, 860, 1700, 12)
-		add_child(g_character_pool)
+		add_child(g_character_pool, true)
 	else:
 		var character_pool_res = load("res://scripts/ObjectPool.gd")
 		g_character_pool = character_pool_res.new()
 		g_character_pool.init("res://scenes/characters/", 860, 860, 1700, 2)
-		add_child(g_character_pool)
+		add_child(g_character_pool, true)
+		
+	g_character_pool.pause_mode = Node.PAUSE_MODE_PROCESS
 	
 	_update_for_current_level()
+	
+	get_tree().paused = true
 	
 func _process(delta):
 	if g_game_over_msecs and OS.get_system_time_msecs() - g_game_over_msecs > SHOW_RESTART_DELAY_MSECS:
@@ -118,3 +121,8 @@ func _on_RestartLabel_gui_input(event):
 # end.
 func increment_trump_score():
 	g_per_round_trump_score += 1
+	
+func on_unpause():
+	g_character_pool.g_should_spawn = true
+	$SucculentPool.g_should_spawn = true
+	$PowerPool.g_should_spawn = true
