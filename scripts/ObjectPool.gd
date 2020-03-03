@@ -60,11 +60,13 @@ func _process(_delta):
 	if g_resources_to_get.size() != 0:
 		for path in g_resources_to_get:
 			if ResourceQueue.is_ready(path):
-				var object = ResourceQueue.get_resource(path).instance()
-				object.global_position = _get_random_global_position(object)
-				g_object_pool.append(object)
-				g_object_pool_available.append(object)
-				get_parent().call_deferred('add_child_below_node', self, object)
+				var resource = ResourceQueue.get_resource(path)
+				for _i in g_copies_of_each:
+					var object = resource.instance()
+					object.global_position = _get_random_global_position(object)
+					g_object_pool.append(object)
+					g_object_pool_available.append(object)
+					get_parent().call_deferred('add_child_below_node', self, object)
 				
 				to_erase.append(path)
 		
