@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/KkSloop.ogg-f11d7365b09a95eb986566ac6c429f65.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/KkSloop.ogg"
+dest_files=[ "res://.import/KkSloop.ogg-f11d7365b09a95eb986566ac6c429f65.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

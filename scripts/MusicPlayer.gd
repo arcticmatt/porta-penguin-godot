@@ -5,13 +5,13 @@ func _ready():
 	self.pause_mode = Node.PAUSE_MODE_PROCESS
 	
 func load_intro_song():
-	var audio_file = load("res://assets/sounds/KkJiffy.wav")
+	var audio_file = load("res://assets/sounds/KkJiffy.ogg")
 	self.stream = audio_file
-	self.stream.set_loop_mode(1)
-	self.stream.set_loop_end(self.stream.get_length() * self.stream.get_mix_rate())
+	self.stream.set_loop(true)
+	self.stream.set_loop_offset(self.stream.get_length())
 	
 func load_main_song():
-	var audio_file = load("res://assets/sounds/KkSloop.wav")
+	var audio_file = load("res://assets/sounds/KkSloop.ogg")
 	self.stream = audio_file
-	self.stream.set_loop_mode(1)
-	self.stream.set_loop_end(self.stream.get_length() * self.stream.get_mix_rate())
+	self.stream.set_loop(true)
+	self.stream.set_loop_offset(self.stream.get_length())
