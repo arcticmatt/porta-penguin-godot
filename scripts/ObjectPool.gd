@@ -123,9 +123,6 @@ func _find_and_remove_available_object():
 		return null
 	var available_index = randi() % g_object_pool_available.size()
 	var available_object = g_object_pool_available[available_index]
-	# Wait until Node has entered Scene Tree
-	if available_object.get_parent() == null:
-		return null
 	g_object_pool_available.remove(available_index)
 	return available_object
 	

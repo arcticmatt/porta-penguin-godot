@@ -11,7 +11,6 @@ func _ready():
 	# Programatically set to make sure we're being consistent
 	collision_layer = 4
 	collision_mask = 8
-	$Collision0.disabled = true
 	
 	# A little jank, but it works
 	if "Trump" in name:
@@ -26,7 +25,6 @@ func get_height():
 func reset():
 	g_velocity = 0
 	$Sprite.frame = 0
-	$Collision0.disabled = true
 	
 func start(velocity):
 	g_velocity = -velocity

@@ -3,7 +3,6 @@
 [ext_resource path="res://scripts/Succulent.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/succulents/Succulent3.png" type="Texture" id=2]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "Rotate"
 length = 3.6
