@@ -1,6 +1,6 @@
 extends Node2D
 
-const DISABLE_INPUT_MSECS = 500
+const DISABLE_INPUT_MSECS = 1000
 var g_enter_msecs = null
 
 func _enter_tree():

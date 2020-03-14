@@ -10,9 +10,6 @@ func _input(event):
 func _ready():
 	$CharacterPool.g_should_spawn = true
 	
-	MusicPlayer.load_intro_song()
-	MusicPlayer.play()
-	
 	_update_current_player()
 		
 	$HBoxMain/MarginLeft/VBoxText/Highscore.text = "Highscore: " + str(Save.get_highscore())
@@ -21,7 +18,7 @@ func _ready():
 func _on_Play_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		Settings.disable_trump_mode()
-		SceneTransition.change_scene("res://scenes/Main.tscn")
+		SceneTransition.change_scene("res://scenes/Main.tscn", 1, .35)
 
 func _on_Unlocks_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:

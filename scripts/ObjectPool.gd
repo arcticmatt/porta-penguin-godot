@@ -38,6 +38,7 @@ func use_params(params):
 	# it looks weird
 
 func _ready():
+	pause_mode = Node.PAUSE_MODE_PROCESS
 	ResourceQueue.start()
 
 	var files = _list_files_in_directory(g_path)

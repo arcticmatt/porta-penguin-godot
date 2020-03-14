@@ -14,9 +14,6 @@ var g_character_pool = null
 var g_per_round_trump_score = 0
 
 func _ready():
-	MusicPlayer.load_main_song()
-	MusicPlayer.play()
-		
 	if Settings.get_player() == Settings.Player.CAT:
 		remove_child($Penguin)
 		g_player = $Cat
@@ -43,8 +40,6 @@ func _ready():
 		g_character_pool = character_pool_res.new()
 		g_character_pool.init("res://scenes/characters/", 860, 860, 1700, 2)
 		add_child(g_character_pool, true)
-		
-	g_character_pool.pause_mode = Node.PAUSE_MODE_PROCESS
 	
 	_update_for_current_level()
 	
@@ -105,13 +100,14 @@ func score():
 		_update_for_current_level()
 
 func _update_for_current_level():
+
 	g_character_pool.use_params(Levels.get_current_character_pool_params())
 	$SucculentPool.use_params(Levels.get_current_succulent_pool_params())
 	$PowerPool.use_params(Levels.get_current_power_pool_params())
 
 func _on_RestartLabel_gui_input(event):
 	if event is InputEventMouseButton and event.pressed and g_game_over:
-		SceneTransition.reload_current_scene(2)
+		SceneTransition.reload_current_scene(1, .35)
 		
 # Used to keep track of the Trump score per round, so we only have to write to the file at the
 # end.

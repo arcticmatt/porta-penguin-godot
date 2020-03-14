@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/SceneTransition.gd" type="Script" id=1]
 
@@ -18,7 +18,21 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-resource_name = "red"
+resource_name = "fadeout"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/Black:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/Black:color")
 tracks/0/interp = 1
@@ -59,4 +73,5 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.5
 anims/fade = SubResource( 1 )
-anims/red = SubResource( 2 )
+anims/fadeout = SubResource( 2 )
+anims/red = SubResource( 3 )
