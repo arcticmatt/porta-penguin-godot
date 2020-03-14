@@ -7,12 +7,19 @@ const OFFSCREEN_POSITION = Vector2(-100, -100)
 var g_starting_position = OFFSCREEN_POSITION
 
 func deactivate():
+	$BottomCollision.disabled = true
+	$MiddleCollision.disabled = true
+	$TopCollision.disabled = true
 	visible = false
 	set_linear_velocity(Vector2(0, 0))
 	set_gravity_scale(0)
 	g_starting_position = OFFSCREEN_POSITION
 	
 func activate(starting_velocity, new_position, scale):
+	# For performance
+	$BottomCollision.disabled = false
+	$MiddleCollision.disabled = false
+	$TopCollision.disabled = false
 	set_gravity_scale(10)
 	_set_scale(scale)
 	g_starting_position = new_position
