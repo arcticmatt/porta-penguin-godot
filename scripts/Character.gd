@@ -6,11 +6,18 @@ var g_is_trump = false
 # Initially at 0, characters are made to move by the ObjectPool.
 var g_velocity = 0
 
+var g_started = false
+
 func _ready():
 	$Area2D.connect("body_entered", self, "_on_body_entered")
 	# Programatically set to make sure we're being consistent
 	collision_layer = 4
 	collision_mask = 8
+	# Call to add this Node to SceneTree can be deferred - start() may be 
+	# called before _ready()
+	if not g_started:
+		# For performance
+		$Collision0.disabled = true
 	
 	# A little jank, but it works
 	if "Trump" in name:
@@ -25,8 +32,11 @@ func get_height():
 func reset():
 	g_velocity = 0
 	$Sprite.frame = 0
+	# For performance
+	$Collision0.disabled = true
 	
 func start(velocity):
+	g_started = true
 	g_velocity = -velocity
 	$Collision0.disabled = false
 	$Sprite/AnimationPlayer.play("Walk")
