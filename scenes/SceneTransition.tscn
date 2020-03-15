@@ -17,7 +17,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 resource_name = "fadeout"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/Black:modulate")
@@ -32,8 +32,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "fadeout2"
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/Black:modulate")
 tracks/0/interp = 1
@@ -61,8 +60,7 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 1 ), Color( 0.980392, 0.192157, 0.0117647, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "progress"
+[sub_resource type="Animation" id=6]
 length = 1.25
 step = 0.05
 tracks/0/type = "value"
@@ -78,8 +76,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 62 ), Vector2( 187.5, 62 ), Vector2( 375, 62 ), Vector2( 562.5, 62 ), Vector2( 750, 62 ), Vector2( 750, 62 ) ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "progress_smooth"
+[sub_resource type="Animation" id=7]
 length = 1.25
 step = 0.05
 tracks/0/type = "value"
@@ -122,13 +119,13 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.5
 anims/fade = SubResource( 1 )
-anims/fadeout = SubResource( 2 )
-anims/fadeout2 = SubResource( 4 )
+anims/fadeout = SubResource( 4 )
+anims/fadeout2 = SubResource( 5 )
 anims/red = SubResource( 3 )
 
 [node name="ProgressBarPlayer" type="AnimationPlayer" parent="."]
-anims/progress = SubResource( 5 )
-anims/progress_smooth = SubResource( 6 )
+anims/progress = SubResource( 6 )
+anims/progress_smooth = SubResource( 7 )
 
 [node name="WhiteRect" type="ColorRect" parent="."]
 visible = false

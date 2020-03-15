@@ -57,6 +57,7 @@ func _enter_tree():
 	get_tree().paused = true
 	
 func reset():
+	_lose_all_powers()
 	$PlayerSprite.frame = 0
 	$Collision0.disabled = true
 	g_dead = false
