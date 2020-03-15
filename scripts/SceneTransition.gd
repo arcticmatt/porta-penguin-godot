@@ -2,7 +2,11 @@ extends CanvasLayer
 
 var thread = Thread.new()
 
+# Normal mode
 var g_saved_main_node = null
+
+# Trump mode
+var g_saved_main_node_trump = null
 
 func change_scene_node(node, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0, long_fade = false):
 	MainMusicPlayer.stop_all()
@@ -120,3 +124,9 @@ func save_main_node(node):
 
 func get_saved_main_node():
 	return g_saved_main_node
+	
+func save_main_node_trump(node):
+	g_saved_main_node_trump = node
+
+func get_saved_main_node_trump():
+	return g_saved_main_node_trump

@@ -9,7 +9,7 @@ func _ready():
 
 func _on_TrumpButton_pressed():
 	Settings.enable_trump_mode()
-	if SceneTransition.get_saved_main_node():
-		SceneTransition.change_scene_node(SceneTransition.get_saved_main_node(), 1, 1, null)
+	if SceneTransition.get_saved_main_node_trump():
+		SceneTransition.change_scene_node(SceneTransition.get_saved_main_node_trump(), 1, 1, null)
 	else:
 		SceneTransition.change_scene_path("res://scenes/Main.tscn", 1, .35, 1.5, true)

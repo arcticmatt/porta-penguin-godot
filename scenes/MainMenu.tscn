@@ -212,7 +212,7 @@ visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 3200.0
-margin_bottom = 825.0
+margin_bottom = 873.0
 mouse_filter = 1
 [connection signal="gui_input" from="HBoxMain/MarginLeft/VBoxText/Play" to="." method="_on_Play_gui_input"]
 [connection signal="gui_input" from="HBoxMain/MarginLeft/VBoxText/Unlocks" to="." method="_on_Unlocks_gui_input"]
