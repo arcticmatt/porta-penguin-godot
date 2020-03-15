@@ -161,6 +161,7 @@ script = ExtResource( 4 )
 ] instance=ExtResource( 5 )]
 position = Vector2( 410.391, 512.744 )
 disable_input = true
+is_cat = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Cat"]
 autoplay = "Fly"

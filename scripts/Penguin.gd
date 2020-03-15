@@ -15,6 +15,8 @@ const NONE_POWER = 'none'
 
 export var use_poop_button = false
 export var disable_input = false
+# We do some special casing for the cat
+export var is_cat = false
 
 var g_dead = false
 var g_poop_pool = []
@@ -203,6 +205,13 @@ func _hide_all_accessories():
 		
 func update_texture():
 	var resource = Settings.get_player_resource()
-	if resource:
+	# Bug this avoids:
+	# 1) Start in MainMenu with Penguin. That means the Cat node will have the 
+	#    penguin's texture loaded from the call to update_texture in _ready
+	#    (if we don't have the is_cat flag).
+	# 2) Change player to Cat.
+	# 3) When you hide the unlocks, the player will now be a huge penguin, because
+	#    the Cat's texture will still be the penguin texture.
+	if resource and not is_cat:
 		var texture = Utils.get_texture(resource)
 		$PlayerSprite.texture = texture

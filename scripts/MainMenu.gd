@@ -26,7 +26,7 @@ func _on_Play_gui_input(event):
 func _on_Unlocks_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		_show_unlocks()
-			
+
 func _show_unlocks():
 	$TrumpButtonParent.visible = false
 	$Unlocks.enter()
