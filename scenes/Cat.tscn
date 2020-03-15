@@ -307,5 +307,5 @@ polygon = PoolVector2Array( -125.755, -25.9045, -118.527, -20.377, -106.409, -6.
 
 [node name="PoopAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
-volume_db = -9.0
+volume_db = -20.0
 [connection signal="body_entered" from="." to="." method="_on_PlayerRigidBody_body_entered"]
