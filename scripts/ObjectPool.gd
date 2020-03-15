@@ -36,7 +36,15 @@ func use_params(params):
 	disabled = params.disabled
 	# Note: don't update speed of objects that are currently on screen,
 	# it looks weird
-
+	
+func reset():
+	g_object_pool_available = []
+	for object in g_object_pool:
+		object.global_position = _get_random_global_position(object)
+		object.reset()
+		g_object_pool_available.append(object)
+	g_should_spawn = false
+		
 func _ready():
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	ResourceQueue.start()

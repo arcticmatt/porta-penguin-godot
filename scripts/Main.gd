@@ -13,6 +13,8 @@ var g_character_pool = null
 
 var g_per_round_trump_score = 0
 
+var g_reset = false
+
 func _ready():
 	if Settings.get_player() == Settings.Player.CAT:
 		remove_child($Penguin)
@@ -106,13 +108,38 @@ func _update_for_current_level():
 
 func _on_RestartLabel_gui_input(event):
 	if event is InputEventMouseButton and event.pressed and g_game_over:
-		SceneTransition.reload_current_scene(1, .35)
+		_reset()
 		
 # Custom reset function, to be used instead of SceneTransition.reload_current_scene.
 # This is for performance reasons, so we can avoid instancing Nodes, adding them
 # to the SceneTree, etc.
 func _reset():
-	pass
+	yield(SceneTransition.play_fade_in(1), "completed")
+	g_reset = true
+	$ScoreLabel.reset()
+	$ControlsContainer.reset()
+	$MainMenuLabel.reset()
+	$Pauser.reset()
+	g_player.reset()
+	
+	$Background1.position = Vector2(0, 0)
+	$Background2.position = Vector2(1600, 0)
+	
+	$CenterContainer.visible = false
+	
+	yield(g_player, "reset_done")
+	print('penguin reset done, ', g_player.position)
+	get_tree().paused = true
+	g_game_over = false
+	
+	g_character_pool.reset()
+	$SucculentPool.reset()
+	$PowerPool.reset()
+	
+	g_per_round_trump_score = 0
+	
+	g_reset = false
+	SceneTransition.play_fade_out(1)
 		
 # Used to keep track of the Trump score per round, so we only have to write to the file at the
 # end.
@@ -123,3 +150,6 @@ func on_unpause():
 	g_character_pool.g_should_spawn = true
 	$SucculentPool.g_should_spawn = true
 	$PowerPool.g_should_spawn = true
+	
+func is_reset():
+	return g_reset

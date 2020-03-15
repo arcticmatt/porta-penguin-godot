@@ -27,6 +27,13 @@ func change_scene_to(scene, path, inspeed = 1.0, outspeed = 1.0, long_fade = fal
 	yield($AnimationPlayer, "animation_finished")
 	
 	_play_song_after_change(path)
+	
+func play_fade_in(speed = 1.0):
+	$AnimationPlayer.play("fade", -1, speed)
+	yield($AnimationPlayer, "animation_finished")
+	
+func play_fade_out(speed = 1.0):
+	$AnimationPlayer.play("fadeout2", -1, speed)
 
 func reload_current_scene(inspeed = 1.0, outspeed = 1.0):
 	MusicPlayer.stop()

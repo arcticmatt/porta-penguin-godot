@@ -56,3 +56,6 @@ func _update_current_player():
 		$Penguin.visible = true
 		$Cat.visible = false
 		g_player = $Penguin
+
+func is_reset():
+	return false

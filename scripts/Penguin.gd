@@ -6,6 +6,7 @@ const DEFAULT_POOP_RATE_MS = 750
 const LAXATIVE_POOP_RATE_MS = 100
 const DEFAULT_POOP_SCALE = Vector2(1.5, 1.5)
 const CONSTIPATION_POOP_SCALE = Vector2(3, 3)
+const RESET_POSITION = Vector2(223, 330)
 
 # Powers
 const CONSTIPATION_POWER = 'constipation'
@@ -30,17 +31,33 @@ var g_last_poop_ms = 0
 
 # Signals
 signal signal_player_dead
+signal reset_done
+
+var g_reset = false
 
 func _ready():
 	update_accessory()
 	update_texture()
 	_fill_poop_pool()
+	
+func reset():
+	$PlayerSprite.frame = 0
+	$Collision0.disabled = true
+	g_dead = false
+	$PlayerSprite/IdleAnimationPlayer.play("Idling", -1, 2)
+	g_reset = true
+	
+func _integrate_forces(state):
+	if g_reset:
+		state.set_transform(Transform2D(0.0, RESET_POSITION))
+		state.set_angular_velocity(0.0)
+		state.set_linear_velocity(Vector2(0, 0))
 
 func _enter_tree():
 	$PlayerSprite/IdleAnimationPlayer.play("Idling", -1, 2)
 	
 func _input(event):
-	if g_dead or get_tree().paused or disable_input:
+	if g_dead or get_tree().paused or disable_input or get_parent().is_reset():
 		return
 
 	if event is InputEventKey:
@@ -55,7 +72,7 @@ func _input(event):
 
 # So we can hold down to poop
 func _process_input():
-	if g_dead or get_tree().paused:
+	if g_dead or get_tree().paused or get_parent().is_reset():
 		return
 
 	if use_poop_button and $ButtonRight.is_pressed():
@@ -69,6 +86,11 @@ func _fill_poop_pool():
 		get_parent().call_deferred("add_child", poop_object)
 
 func _process(_delta):
+	if g_reset and (position - RESET_POSITION).length() < 0.5:
+		emit_signal("reset_done")
+		g_reset = false
+		$Collision0.disabled = false
+
 	_process_input()
 	if g_power_acquired != NONE_POWER:
 		var power_duration = OS.get_system_time_secs() - g_power_acquire_time_secs
