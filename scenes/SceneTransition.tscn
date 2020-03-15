@@ -17,7 +17,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "fadeout"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/Black:modulate")
@@ -32,8 +32,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "fadeout_uneven"
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/Black:modulate")
 tracks/0/interp = 1
@@ -61,7 +60,7 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 1 ), Color( 0.980392, 0.192157, 0.0117647, 1 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=6]
 resource_name = "progress"
 length = 1.25
 step = 0.05
@@ -78,14 +77,14 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 32 ), Vector2( 750, 32 ) ]
 }
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.890196, 0.545098, 0.576471, 1 )
 corner_radius_top_left = 20
 corner_radius_top_right = 20
@@ -106,8 +105,7 @@ __meta__ = {
 
 [node name="Black" type="ColorRect" parent="Control"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = -1.396
-margin_right = 1598.6
+margin_right = 1600.0
 margin_bottom = 900.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -120,12 +118,12 @@ __meta__ = {
 [node name="FadePlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.5
 anims/fade = SubResource( 1 )
-anims/fadeout = SubResource( 5 )
-anims/fadeout_uneven = SubResource( 4 )
+anims/fadeout = SubResource( 4 )
+anims/fadeout_uneven = SubResource( 5 )
 anims/red = SubResource( 3 )
 
 [node name="ProgressBarPlayer" type="AnimationPlayer" parent="."]
-anims/progress = SubResource( 9 )
+anims/progress = SubResource( 6 )
 
 [node name="WhiteButton" type="Button" parent="."]
 visible = false
@@ -137,7 +135,7 @@ margin_left = -375.0
 margin_top = -16.0
 margin_right = 375.0
 margin_bottom = 16.0
-custom_styles/normal = SubResource( 8 )
+custom_styles/normal = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -152,7 +150,7 @@ margin_left = -375.0
 margin_top = -16.0
 margin_right = 375.0
 margin_bottom = 16.0
-custom_styles/normal = SubResource( 10 )
+custom_styles/normal = SubResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

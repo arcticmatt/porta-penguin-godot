@@ -7,7 +7,6 @@ func _on_MainMenuLabel_gui_input(event):
 			SceneTransition.save_main_node_trump(current)
 		else:
 			SceneTransition.save_main_node(current)
-		MainMusicPlayer.stop_all()
 		
 func reset():
 	visible = false

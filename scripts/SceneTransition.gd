@@ -36,7 +36,7 @@ func change_scene_path(path, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0
 	
 	$FadePlayer.play("fade", -1, inspeed)
 	yield($FadePlayer, "animation_finished")
-
+	
 	var current_scene = self._remove_current_scene()
 	var next_scene_resource = load(path)
 	var next_scene = next_scene_resource.instance()

@@ -25,21 +25,23 @@ var g_cat = null
 func _enter_tree():
 	if not g_penguin:
 		g_penguin = $Penguin
+		g_penguin.connect("signal_player_dead", self, "game_over")
 	if not g_cat:
 		g_cat = $Cat 
+		g_cat.connect("signal_player_dead", self, "game_over")
 		
 	if Settings.get_player() == Settings.Player.CAT:
-		remove_child(g_penguin)
+		if g_penguin.get_parent():
+			remove_child(g_penguin)
 		g_player = g_cat
 		if g_player.get_parent() == null:
 			add_child_below_node($PowerPool, g_player)
 	else:
-		remove_child(g_cat)
+		if g_cat.get_parent():
+			remove_child(g_cat)
 		g_player = g_penguin
 		if g_player.get_parent() == null:
 			add_child_below_node($PowerPool, g_player)
-	
-	g_player.connect("signal_player_dead", self, "game_over")
 		
 	g_per_round_trump_score = 0
 	
