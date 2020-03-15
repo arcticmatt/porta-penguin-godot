@@ -6,22 +6,25 @@ func _input(event):
 	# For testing
 	if event.is_action_pressed("show_unlocks"):
 		_show_unlocks()
+		
+func _enter_tree():
+	$HBoxMain/MarginLeft/VBoxText/Highscore.text = "Highscore: " + str(Save.get_highscore())
 
 func _ready():
 	$CharacterPool.g_should_spawn = true
 	
 	_update_current_player()
 		
-	$HBoxMain/MarginLeft/VBoxText/Highscore.text = "Highscore: " + str(Save.get_highscore())
 	g_player.get_node("PlayerSprite/IdleAnimationPlayer").play("Idling", -1, 2)
 
 func _on_Play_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		Settings.disable_trump_mode()
 		if SceneTransition.get_saved_main_node():
-			SceneTransition.change_scene_node(SceneTransition.get_saved_main_node(), 1, 1, null)
+			SceneTransition.change_scene_node(SceneTransition.get_saved_main_node(), 1, .5, null)
 		else:
-			SceneTransition.change_scene_path("res://scenes/Main.tscn", 1, .35, 1.5, true)
+			var current = yield(SceneTransition.change_scene_path("res://scenes/Main.tscn", 1, .35, 1.5, true), "completed")
+			SceneTransition.save_main_menu_node(current)
 
 func _on_Unlocks_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:

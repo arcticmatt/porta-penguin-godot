@@ -8,6 +8,8 @@ var g_saved_main_node = null
 # Trump mode
 var g_saved_main_node_trump = null
 
+var g_saved_main_menu_node = null
+
 func change_scene_node(node, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0, long_fade = false):
 	MainMusicPlayer.stop_all()
 	
@@ -16,6 +18,9 @@ func change_scene_node(node, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0
 
 	var current_scene = self._remove_current_scene()
 	get_tree().get_root().add_child(node)
+	
+	# Play song early here, changing with a Node is fast
+	_play_song_name(node.get_name())
 	
 	if long_fade:
 		$FadePlayer.play("fadeout_uneven", -1, outspeed)
@@ -26,8 +31,6 @@ func change_scene_node(node, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0
 		_play_progress(progress_speed)
 		
 	yield($FadePlayer, "animation_finished")
-	
-	_play_song_name(node.get_name())
 	
 	return current_scene
 	
@@ -108,6 +111,8 @@ func _play_song_path(path):
 func _play_song_name(name):
 	if name == "Main":
 		MainMusicPlayer.play()
+	elif name == "MainMenu":
+		IntroMusicPlayer.play()
 
 func _get_current_scene():
 	var root = get_tree().get_root()
@@ -119,14 +124,20 @@ func _remove_current_scene():
 	root.remove_child(current_scene)
 	return current_scene
 
-func save_main_node(node):
-	g_saved_main_node = node
-
 func get_saved_main_node():
 	return g_saved_main_node
 	
-func save_main_node_trump(node):
-	g_saved_main_node_trump = node
-
 func get_saved_main_node_trump():
 	return g_saved_main_node_trump
+
+func get_saved_main_menu_node():
+	return g_saved_main_menu_node
+	
+func save_main_node(node):
+	g_saved_main_node = node
+	
+func save_main_node_trump(node):
+	g_saved_main_node_trump = node
+	
+func save_main_menu_node(node):
+	g_saved_main_menu_node = node

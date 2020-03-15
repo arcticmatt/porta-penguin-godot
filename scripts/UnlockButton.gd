@@ -23,8 +23,7 @@ var g_which_unlock = null
 
 var g_unlock_grid = null
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func _enter_tree():
 	g_unlock_grid = get_parent().get_parent()
 	self.connect("gui_input", self, "_on_gui_input")
 	

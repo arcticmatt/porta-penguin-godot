@@ -6,7 +6,7 @@ const TITLES = [
 ]
 var g_index = 0
 	
-func _ready():
+func _enter_tree():
 	g_index = 0
 	_update_text()
 	

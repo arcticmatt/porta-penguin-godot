@@ -10,6 +10,7 @@ func _ready():
 func _on_TrumpButton_pressed():
 	Settings.enable_trump_mode()
 	if SceneTransition.get_saved_main_node_trump():
-		SceneTransition.change_scene_node(SceneTransition.get_saved_main_node_trump(), 1, 1, null)
+		SceneTransition.change_scene_node(SceneTransition.get_saved_main_node_trump(), 1, .5, null)
 	else:
-		SceneTransition.change_scene_path("res://scenes/Main.tscn", 1, .35, 1.5, true)
+		var current = yield(SceneTransition.change_scene_path("res://scenes/Main.tscn", 1, .35, 1.5, true), "completed")
+		SceneTransition.save_main_menu_node(current)
