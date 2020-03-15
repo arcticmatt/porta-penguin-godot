@@ -34,17 +34,34 @@ signal signal_player_dead
 signal reset_done
 
 var g_reset = false
+var g_reset_forces_integrated = false
 
 func _ready():
 	update_accessory()
 	update_texture()
 	_fill_poop_pool()
 	
+func _enter_tree():
+	$PlayerSprite/IdleAnimationPlayer.play("Idling", -1, 2)
+	
+	# No need to reset for intro screen
+	if disable_input:
+		return
+		
+	reset()
+	# Similarly to when we restart the game, yield until reset is done. 
+	# This ensures 
+	# a) Player is positioned correctly, and 
+	# b) first jump mechanics are consistent
+	yield(self, "reset_done")
+	get_tree().paused = true
+	
 func reset():
 	$PlayerSprite.frame = 0
 	$Collision0.disabled = true
 	g_dead = false
 	$PlayerSprite/IdleAnimationPlayer.play("Idling", -1, 2)
+	g_reset_forces_integrated = false
 	g_reset = true
 	
 func _integrate_forces(state):
@@ -52,9 +69,7 @@ func _integrate_forces(state):
 		state.set_transform(Transform2D(0.0, RESET_POSITION))
 		state.set_angular_velocity(0.0)
 		state.set_linear_velocity(Vector2(0, 0))
-
-func _enter_tree():
-	$PlayerSprite/IdleAnimationPlayer.play("Idling", -1, 2)
+		g_reset_forces_integrated = true
 	
 func _input(event):
 	if g_dead or get_tree().paused or disable_input or get_parent().is_reset():
@@ -86,7 +101,7 @@ func _fill_poop_pool():
 		get_parent().call_deferred("add_child", poop_object)
 
 func _process(_delta):
-	if g_reset and (position - RESET_POSITION).length() < 0.5:
+	if g_reset and (position - RESET_POSITION).length() < 0.5 and g_reset_forces_integrated:
 		emit_signal("reset_done")
 		g_reset = false
 		$Collision0.disabled = false
@@ -118,7 +133,10 @@ func _player_poop():
 	$PoopAudioPlayer.play()
 	
 func _on_PlayerRigidBody_body_entered(_body):
-	emit_signal("signal_player_dead", Constants.HIT_SOMETHING)
+	# Reset happens in _enter_tree() - don't process collisions during the reset
+	# process
+	if not g_reset:
+		emit_signal("signal_player_dead", Constants.HIT_SOMETHING)
 	
 func player_game_over():
 	$PlayerSprite/FlapAnimationPlayer.stop()
@@ -184,5 +202,6 @@ func _hide_all_accessories():
 		
 func update_texture():
 	var resource = Settings.get_player_resource()
-	var texture = Utils.get_texture(resource)
-	$PlayerSprite.texture = texture
+	if resource:
+		var texture = Utils.get_texture(resource)
+		$PlayerSprite.texture = texture

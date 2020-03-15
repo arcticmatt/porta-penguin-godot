@@ -1,7 +1,5 @@
 extends TextureButton
 
-var g_main_scene = preload("res://scenes/Main.tscn")
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if UnlockRequirements.is_trump_mode_unlocked():
@@ -11,5 +9,7 @@ func _ready():
 
 func _on_TrumpButton_pressed():
 	Settings.enable_trump_mode()
-	MusicPlayer.play()
-	get_tree().change_scene_to(g_main_scene)
+	if SceneTransition.get_saved_main_node():
+		SceneTransition.change_scene_node(SceneTransition.get_saved_main_node(), 1, 1, null)
+	else:
+		SceneTransition.change_scene_path("res://scenes/Main.tscn", 1, .35, 1.5, true)

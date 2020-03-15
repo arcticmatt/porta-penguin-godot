@@ -18,7 +18,10 @@ func _ready():
 func _on_Play_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		Settings.disable_trump_mode()
-		SceneTransition.change_scene("res://scenes/Main.tscn", 1, .35, 1.5, true)
+		if SceneTransition.get_saved_main_node():
+			SceneTransition.change_scene_node(SceneTransition.get_saved_main_node(), 1, 1, null)
+		else:
+			SceneTransition.change_scene_path("res://scenes/Main.tscn", 1, .35, 1.5, true)
 
 func _on_Unlocks_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:

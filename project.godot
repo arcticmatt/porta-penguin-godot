@@ -29,9 +29,10 @@ Levels="*res://scripts/Levels.gd"
 Settings="*res://scripts/Settings.gd"
 Utils="*res://scripts/Utils.gd"
 UnlockRequirements="*res://scripts/UnlockRequirements.gd"
-MusicPlayer="*res://scripts/MusicPlayer.gd"
 ResourceQueue="*res://scripts/ResourceQueue.gd"
 SceneTransition="*res://scenes/SceneTransition.tscn"
+IntroMusicPlayer="*res://scripts/IntroMusicPlayer.gd"
+MainMusicPlayer="*res://scripts/MainMusicPlayer.gd"
 
 [display]
 

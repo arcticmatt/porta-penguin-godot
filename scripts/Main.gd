@@ -15,22 +15,45 @@ var g_per_round_trump_score = 0
 
 var g_reset = false
 
-func _ready():
+# There are two playable characters. 
+var g_penguin = null
+var g_cat = null
+
+# Needed because we only instance this Node the first time we enter from 
+# MainMenu. Every other time, we grab the saved instance and show it. Thus
+# _ready() will not be called.
+func _enter_tree():
+	if not g_penguin:
+		g_penguin = $Penguin
+	if not g_cat:
+		g_cat = $Cat 
+		
 	if Settings.get_player() == Settings.Player.CAT:
-		remove_child($Penguin)
-		g_player = $Cat
+		remove_child(g_penguin)
+		g_player = g_cat
+		if g_player.get_parent() == null:
+			add_child_below_node($PowerPool, g_player)
 	else:
-		remove_child($Cat)
-		g_player = $Penguin
+		remove_child(g_cat)
+		g_player = g_penguin
+		if g_player.get_parent() == null:
+			add_child_below_node($PowerPool, g_player)
+		
+	g_player.connect("signal_player_dead", self, "game_over")
 		
 	g_per_round_trump_score = 0
+	
+	Levels.reset_current_level()
+	if g_character_pool:
+		_update_for_current_level()
+	
+	g_game_over_msecs = null
 
+func _ready():
 	# Top
 	_add_wall(Vector2(0, -10), Vector2(1600, 10))
 	# Bottom, covers grass
 	_add_wall(Vector2(0, 900), Vector2(1600, 50))
-	g_player.connect("signal_player_dead", self, "game_over")
-	g_game_over_msecs = null
 
 	if Settings.is_trump_mode_enabled():
 		var character_pool_res = load("res://scripts/ObjectPool.gd")
@@ -42,10 +65,33 @@ func _ready():
 		g_character_pool = character_pool_res.new()
 		g_character_pool.init("res://scenes/characters/", 860, 860, 1700, 2)
 		add_child(g_character_pool, true)
-	
+		
 	_update_for_current_level()
+
+# Do some tear down when this scene exits, because it is saved and re-used
+# for subsequent re-entries from MainMenu.
+#
+# Could also technically do some of this in _enter_tree(), but it's not necessary
+# the first time around (the first time the scene is entered via MainMenu),
+# so I'm putting it here. 
+func _exit_tree():
+	$ScoreLabel.reset()
+	$ControlsContainer.reset()
+	$MainMenuLabel.reset()
+	$Pauser.reset()
 	
-	get_tree().paused = true
+	$Background1.position = Vector2(0, 0)
+	$Background2.position = Vector2(1600, 0)
+	
+	$CenterContainer.visible = false
+	
+	g_game_over = false
+	
+	g_character_pool.reset()
+	$SucculentPool.reset()
+	$PowerPool.reset()
+	
+	g_per_round_trump_score = 0
 	
 func _process(_delta):
 	if g_game_over_msecs and OS.get_system_time_msecs() - g_game_over_msecs > SHOW_RESTART_DELAY_MSECS:
@@ -114,6 +160,7 @@ func _on_RestartLabel_gui_input(event):
 # This is for performance reasons, so we can avoid instancing Nodes, adding them
 # to the SceneTree, etc.
 func _reset():
+	MainMusicPlayer.stop()
 	yield(SceneTransition.play_fade_in(1), "completed")
 	g_reset = true
 	$ScoreLabel.reset()
@@ -127,19 +174,24 @@ func _reset():
 	
 	$CenterContainer.visible = false
 	
+	# Yield until the Player is done resetting.
+	# This ensures 
+	# a) Player is positioned correctly, and 
+	# b) first jump mechanics are consistent
 	yield(g_player, "reset_done")
-	print('penguin reset done, ', g_player.position)
 	get_tree().paused = true
 	g_game_over = false
 	
 	g_character_pool.reset()
 	$SucculentPool.reset()
 	$PowerPool.reset()
+	_update_for_current_level()
 	
 	g_per_round_trump_score = 0
 	
 	g_reset = false
-	SceneTransition.play_fade_out(1)
+	yield(SceneTransition.play_fade_out(1), "completed")
+	MainMusicPlayer.play()
 		
 # Used to keep track of the Trump score per round, so we only have to write to the file at the
 # end.

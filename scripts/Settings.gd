@@ -55,15 +55,14 @@ var g_player_to_resource = {
 	Player.PURPLE: "res://assets/sprites/players/PenguinPurple.png",
 	Player.TEAL: "res://assets/sprites/players/PenguinTeal.png",
 	Player.YELLOW: "res://assets/sprites/players/PenguinYellow.png",
-	# TODO: update this!
-	Player.CAT: "res://assets/sprites/players/Cat.png"
 }
 
 var g_accessory = Accessory.NONE
 var g_player = Player.DEFAULT
 var g_trump_mode = false
 
-func _ready():
+# _enter_tree instead of _ready because Settings is used inside of Main._enter_trree
+func _enter_tree():
 	g_player = Save.get_player()
 	g_accessory = Save.get_accessory()
 	
@@ -98,7 +97,9 @@ func get_player():
 	return g_player
 
 func get_player_resource():
-	return g_player_to_resource[g_player]
+	if g_player_to_resource.has(g_player):
+		return g_player_to_resource[g_player]
+	return null
 	
 func disable_trump_mode():
 	g_trump_mode = false

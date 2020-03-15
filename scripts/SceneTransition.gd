@@ -1,13 +1,18 @@
 extends CanvasLayer
 
 var thread = Thread.new()
-	
-func change_scene(path, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0, long_fade = false):
-	MusicPlayer.stop()
+
+var g_saved_main_node = null
+
+func change_scene_node(node, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0, long_fade = false):
+	IntroMusicPlayer.stop()
+	MainMusicPlayer.stop()
 	
 	$AnimationPlayer.play("fade", -1, inspeed)
 	yield($AnimationPlayer, "animation_finished")
-	get_tree().change_scene(path)
+
+	var current_scene = self._remove_current_scene()
+	get_tree().get_root().add_child(node)
 	
 	if long_fade:
 		$AnimationPlayer.play("fadeout", -1, outspeed)
@@ -19,10 +24,39 @@ func change_scene(path, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0, lon
 		
 	yield($AnimationPlayer, "animation_finished")
 	
-	_play_song_after_change(path)
+	_play_song_name(node.get_name())
+	
+	return current_scene
+	
+func change_scene_path(path, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0, long_fade = false):
+	IntroMusicPlayer.stop()
+	MainMusicPlayer.stop()
+	
+	$AnimationPlayer.play("fade", -1, inspeed)
+	yield($AnimationPlayer, "animation_finished")
+
+	var current_scene = self._remove_current_scene()
+	var next_scene_resource = load(path)
+	var next_scene = next_scene_resource.instance()
+	get_tree().get_root().add_child(next_scene)
+	
+	if long_fade:
+		$AnimationPlayer.play("fadeout", -1, outspeed)
+	else:
+		$AnimationPlayer.play("fadeout2", -1, outspeed)
+		
+	if progress_speed != null:
+		_play_progress(progress_speed)
+		
+	yield($AnimationPlayer, "animation_finished")
+	
+	_play_song_path(path)
+	
+	return current_scene
 	
 func change_scene_to(scene, path, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0, long_fade = false):
-	MusicPlayer.stop()
+	IntroMusicPlayer.stop()
+	MainMusicPlayer.stop()
 	
 	$AnimationPlayer.play("fade", -1, inspeed)
 	yield($AnimationPlayer, "animation_finished")
@@ -38,7 +72,7 @@ func change_scene_to(scene, path, inspeed = 1.0, outspeed = 1.0, progress_speed 
 		
 	yield($AnimationPlayer, "animation_finished")
 	
-	_play_song_after_change(path)
+	_play_song_path(path)
 	
 func play_fade_in(speed = 1.0):
 	$AnimationPlayer.play("fade", -1, speed)
@@ -46,17 +80,7 @@ func play_fade_in(speed = 1.0):
 	
 func play_fade_out(speed = 1.0):
 	$AnimationPlayer.play("fadeout2", -1, speed)
-
-func reload_current_scene(inspeed = 1.0, outspeed = 1.0):
-	MusicPlayer.stop()
-	
-	$AnimationPlayer.play("fade", -1, inspeed)
 	yield($AnimationPlayer, "animation_finished")
-	get_tree().reload_current_scene()
-	$AnimationPlayer.play("fadeout", -1, outspeed)
-	yield($AnimationPlayer, "animation_finished")
-	
-	_play_song_after_reload(get_tree().get_current_scene().get_name())
 
 func _play_progress(speed):
 	thread.start(self, "_play_progress_threaded", speed)
@@ -74,15 +98,28 @@ func _play_progress_threaded(speed):
 	$GreenRect.rect_size = Vector2(0, 62)
 	$ProgressBarPlayer.stop()
 
-func _play_song_after_change(path):
+func _play_song_path(path):
 	if path == "res://scenes/Main.tscn":
-		MusicPlayer.load_main_song()
-		MusicPlayer.play()
+		MainMusicPlayer.play()
 	elif path == "res://scenes/MainMenu.tscn":
-		MusicPlayer.load_intro_song()
-		MusicPlayer.play()
+		IntroMusicPlayer.play()
 
-func _play_song_after_reload(name):
+func _play_song_name(name):
 	if name == "Main":
-		MusicPlayer.load_main_song()
-		MusicPlayer.play()
+		MainMusicPlayer.play()
+
+func _get_current_scene():
+	var root = get_tree().get_root()
+	return root.get_child(root.get_child_count() - 1)
+		
+func _remove_current_scene():
+	var root = get_tree().get_root()
+	var current_scene = self._get_current_scene()
+	root.remove_child(current_scene)
+	return current_scene
+
+func save_main_node(node):
+	g_saved_main_node = node
+
+func get_saved_main_node():
+	return g_saved_main_node
