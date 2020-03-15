@@ -6,3 +6,7 @@ func _enter_tree():
 	self.stream = audio_file
 	self.stream.set_loop(true)
 	self.stream.set_loop_offset(self.stream.get_length())
+	
+func stop_all():
+	stop()
+	IntroMusicPlayer.stop()

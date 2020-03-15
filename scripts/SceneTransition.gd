@@ -5,8 +5,7 @@ var thread = Thread.new()
 var g_saved_main_node = null
 
 func change_scene_node(node, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0, long_fade = false):
-	IntroMusicPlayer.stop()
-	MainMusicPlayer.stop()
+	MainMusicPlayer.stop_all()
 	
 	$AnimationPlayer.play("fade", -1, inspeed)
 	yield($AnimationPlayer, "animation_finished")
@@ -29,8 +28,7 @@ func change_scene_node(node, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0
 	return current_scene
 	
 func change_scene_path(path, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0, long_fade = false):
-	IntroMusicPlayer.stop()
-	MainMusicPlayer.stop()
+	MainMusicPlayer.stop_all()
 	
 	$AnimationPlayer.play("fade", -1, inspeed)
 	yield($AnimationPlayer, "animation_finished")
@@ -55,8 +53,7 @@ func change_scene_path(path, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0
 	return current_scene
 	
 func change_scene_to(scene, path, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0, long_fade = false):
-	IntroMusicPlayer.stop()
-	MainMusicPlayer.stop()
+	MainMusicPlayer.stop_all()
 	
 	$AnimationPlayer.play("fade", -1, inspeed)
 	yield($AnimationPlayer, "animation_finished")

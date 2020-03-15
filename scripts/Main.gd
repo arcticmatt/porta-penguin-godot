@@ -160,7 +160,7 @@ func _on_RestartLabel_gui_input(event):
 # This is for performance reasons, so we can avoid instancing Nodes, adding them
 # to the SceneTree, etc.
 func _reset():
-	MainMusicPlayer.stop()
+	MainMusicPlayer.stop_all()
 	yield(SceneTransition.play_fade_in(1), "completed")
 	g_reset = true
 	$ScoreLabel.reset()
