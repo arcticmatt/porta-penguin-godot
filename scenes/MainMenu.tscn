@@ -201,6 +201,7 @@ script = ExtResource( 8 )
 [node name="CharacterPool" type="Node2D" parent="."]
 script = ExtResource( 9 )
 g_path = "res://scenes/characters/"
+g_copies_of_each = 1
 g_min_spawn_wait_ms = 500
 g_max_spawn_wait_ms = 1000
 

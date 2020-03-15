@@ -1,16 +1,32 @@
 extends CanvasLayer
 	
-func change_scene(path, inspeed = 1.0, outspeed = 1.0):
+func change_scene(path, inspeed = 1.0, outspeed = 1.0, long_fade = false):
 	MusicPlayer.stop()
 	
 	$AnimationPlayer.play("fade", -1, inspeed)
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene(path)
-	$AnimationPlayer.play("fadeout", -1, outspeed)
+	if long_fade:
+		$AnimationPlayer.play("fadeout", -1, outspeed)
+	else:
+		$AnimationPlayer.play("fadeout2", -1, outspeed)
 	yield($AnimationPlayer, "animation_finished")
 	
 	_play_song_after_change(path)
-		
+	
+func change_scene_to(scene, path, inspeed = 1.0, outspeed = 1.0, long_fade = false):
+	MusicPlayer.stop()
+	
+	$AnimationPlayer.play("fade", -1, inspeed)
+	yield($AnimationPlayer, "animation_finished")
+	get_tree().change_scene_to(scene)
+	if long_fade:
+		$AnimationPlayer.play("fadeout", -1, outspeed)
+	else:
+		$AnimationPlayer.play("fadeout2", -1, outspeed)
+	yield($AnimationPlayer, "animation_finished")
+	
+	_play_song_after_change(path)
 
 func reload_current_scene(inspeed = 1.0, outspeed = 1.0):
 	MusicPlayer.stop()

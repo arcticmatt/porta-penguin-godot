@@ -100,7 +100,6 @@ func score():
 		_update_for_current_level()
 
 func _update_for_current_level():
-
 	g_character_pool.use_params(Levels.get_current_character_pool_params())
 	$SucculentPool.use_params(Levels.get_current_succulent_pool_params())
 	$PowerPool.use_params(Levels.get_current_power_pool_params())
@@ -108,6 +107,12 @@ func _update_for_current_level():
 func _on_RestartLabel_gui_input(event):
 	if event is InputEventMouseButton and event.pressed and g_game_over:
 		SceneTransition.reload_current_scene(1, .35)
+		
+# Custom reset function, to be used instead of SceneTransition.reload_current_scene.
+# This is for performance reasons, so we can avoid instancing Nodes, adding them
+# to the SceneTree, etc.
+func _reset():
+	pass
 		
 # Used to keep track of the Trump score per round, so we only have to write to the file at the
 # end.
