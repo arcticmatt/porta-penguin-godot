@@ -39,11 +39,12 @@ var g_reset = false
 var g_reset_forces_integrated = false
 
 func _ready():
-	update_accessory()
-	update_texture()
 	_fill_poop_pool()
 	
 func _enter_tree():
+	update_texture()
+	update_accessory()
+		
 	$PlayerSprite/IdleAnimationPlayer.play("Idling", -1, 2)
 	
 	# No need to reset for intro screen
