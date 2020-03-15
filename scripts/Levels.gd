@@ -119,7 +119,6 @@ func get_current_character_pool_params():
 	return levels[current_level].character_pool_params
 	
 func get_current_succulent_pool_params():
-	print("current level = ", current_level)
 	return levels[current_level].succulent_pool_params
 	
 func get_current_power_pool_params():
@@ -129,7 +128,6 @@ func advance_level_if_valid(score):
 	if current_level == levels.size() - 1:
 		return false
 	if score >= score_barriers[current_level + 1]:
-		print("advancing level, score = ", score)
 		current_level += 1
 		return true
 	return false

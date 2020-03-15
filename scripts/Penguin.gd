@@ -57,15 +57,28 @@ func _enter_tree():
 	# b) first jump mechanics are consistent
 	yield(self, "reset_done")
 	get_tree().paused = true
+
+func _exit_tree():
+	# Reset when exiting the SceneTree. Avoids a bug when switching playable
+	# characters.
+	# 1) Start as Penguin.
+	# 2) Die.
+	# 3) Go to MainMenu.
+	# 4) Switch to Cat.
+	# 5) Play.
+	# 6) _on_PlayerRigidBody_body_entered triggered by Penguin, probably because
+	#    there's some amount of time it processes before getting removed from
+	#    the SceneTree.
+	reset()
 	
 func reset():
+	g_reset = true
 	_lose_all_powers()
 	$PlayerSprite.frame = 0
 	$Collision0.disabled = true
 	g_dead = false
 	$PlayerSprite/IdleAnimationPlayer.play("Idling", -1, 2)
 	g_reset_forces_integrated = false
-	g_reset = true
 	
 func _integrate_forces(state):
 	if g_reset:

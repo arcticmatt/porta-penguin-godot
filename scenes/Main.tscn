@@ -229,6 +229,7 @@ g_copies_of_each = 5
 [node name="Cat" parent="." instance=ExtResource( 7 )]
 position = Vector2( 230.335, 332.061 )
 use_poop_button = true
+is_cat = true
 
 [node name="ButtonRight" type="TouchScreenButton" parent="Cat"]
 position = Vector2( 569.665, -332.061 )

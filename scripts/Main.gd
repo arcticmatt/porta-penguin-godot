@@ -38,7 +38,7 @@ func _enter_tree():
 		g_player = g_penguin
 		if g_player.get_parent() == null:
 			add_child_below_node($PowerPool, g_player)
-		
+	
 	g_player.connect("signal_player_dead", self, "game_over")
 		
 	g_per_round_trump_score = 0
@@ -135,7 +135,6 @@ func game_over(game_over_text):
 	g_game_over = true
 	g_player.player_game_over()
 	Save.save_score($ScoreLabel.g_score)
-	print('adding %s to trump score' % g_per_round_trump_score)
 	Save.add_to_trump_score(g_per_round_trump_score)
 	Levels.reset_current_level()
 	$MainMenuLabel.visible = true
