@@ -205,6 +205,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 3
 theme = ExtResource( 3 )
 scroll_horizontal_enabled = false
+scroll_vertical_enabled = false
 
 [node name="UnlockGrid" type="GridContainer" parent="HBoxMain/MarginLeft/VBoxMain/PlayerUnlocks/UnlockScroll"]
 margin_right = 828.0
@@ -490,6 +491,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 3
 theme = ExtResource( 3 )
 scroll_horizontal_enabled = false
+scroll_vertical_enabled = false
 
 [node name="UnlockGrid" type="GridContainer" parent="HBoxMain/MarginRight/VBoxMain/AccessoryUnlocks/UnlockScroll"]
 margin_right = 828.0
