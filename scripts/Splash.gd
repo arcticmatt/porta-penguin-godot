@@ -10,5 +10,6 @@ func _on_Timer_timeout():
 		g_main_menu_scene, 
 		"res://scenes/MainMenu.tscn", 
 		1, 
-		1
+		1,
+		null
 	)

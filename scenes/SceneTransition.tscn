@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/SceneTransition.gd" type="Script" id=1]
 
@@ -61,6 +61,40 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 1 ), Color( 0.980392, 0.192157, 0.0117647, 1 ) ]
 }
 
+[sub_resource type="Animation" id=5]
+resource_name = "progress"
+length = 1.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("GreenRect:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 62 ), Vector2( 187.5, 62 ), Vector2( 375, 62 ), Vector2( 562.5, 62 ), Vector2( 750, 62 ), Vector2( 750, 62 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "progress_smooth"
+length = 1.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("GreenRect:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 62 ), Vector2( 750, 62 ) ]
+}
+
 [node name="SceneTransition" type="CanvasLayer"]
 pause_mode = 2
 script = ExtResource( 1 )
@@ -91,3 +125,36 @@ anims/fade = SubResource( 1 )
 anims/fadeout = SubResource( 2 )
 anims/fadeout2 = SubResource( 4 )
 anims/red = SubResource( 3 )
+
+[node name="ProgressBarPlayer" type="AnimationPlayer" parent="."]
+anims/progress = SubResource( 5 )
+anims/progress_smooth = SubResource( 6 )
+
+[node name="WhiteRect" type="ColorRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -375.0
+margin_top = -31.0
+margin_right = 375.0
+margin_bottom = 31.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GreenRect" type="ColorRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -375.0
+margin_top = -31.0
+margin_right = 375.0
+margin_bottom = 31.0
+color = Color( 0.32549, 0.733333, 0.0470588, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
