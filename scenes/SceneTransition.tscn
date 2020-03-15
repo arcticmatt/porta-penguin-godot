@@ -17,22 +17,8 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "fadeout"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Control/Black:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
 [sub_resource type="Animation" id=5]
+resource_name = "fadeout"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/Black:modulate")
 tracks/0/interp = 1
@@ -44,6 +30,21 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fadeout_uneven"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/Black:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -104,6 +105,7 @@ __meta__ = {
 }
 
 [node name="Black" type="ColorRect" parent="Control"]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = -1.396
 margin_right = 1598.6
 margin_bottom = 900.0
@@ -118,8 +120,8 @@ __meta__ = {
 [node name="FadePlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.5
 anims/fade = SubResource( 1 )
-anims/fadeout = SubResource( 4 )
-anims/fadeout2 = SubResource( 5 )
+anims/fadeout = SubResource( 5 )
+anims/fadeout_uneven = SubResource( 4 )
 anims/red = SubResource( 3 )
 
 [node name="ProgressBarPlayer" type="AnimationPlayer" parent="."]

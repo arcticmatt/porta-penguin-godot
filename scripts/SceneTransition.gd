@@ -18,9 +18,9 @@ func change_scene_node(node, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0
 	get_tree().get_root().add_child(node)
 	
 	if long_fade:
-		$FadePlayer.play("fadeout", -1, outspeed)
+		$FadePlayer.play("fadeout_uneven", -1, outspeed)
 	else:
-		$FadePlayer.play("fadeout2", -1, outspeed)
+		$FadePlayer.play("fadeout", -1, outspeed)
 		
 	if progress_speed != null:
 		_play_progress(progress_speed)
@@ -43,9 +43,9 @@ func change_scene_path(path, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0
 	get_tree().get_root().add_child(next_scene)
 	
 	if long_fade:
-		$FadePlayer.play("fadeout", -1, outspeed)
+		$FadePlayer.play("fadeout_uneven", -1, outspeed)
 	else:
-		$FadePlayer.play("fadeout2", -1, outspeed)
+		$FadePlayer.play("fadeout", -1, outspeed)
 		
 	if progress_speed != null:
 		_play_progress(progress_speed)
@@ -64,9 +64,9 @@ func change_scene_to(scene, path, inspeed = 1.0, outspeed = 1.0, progress_speed 
 	get_tree().change_scene_to(scene)
 	
 	if long_fade:
-		$FadePlayer.play("fadeout", -1, outspeed)
+		$FadePlayer.play("fadeout_uneven", -1, outspeed)
 	else:
-		$FadePlayer.play("fadeout2", -1, outspeed)
+		$FadePlayer.play("fadeout", -1, outspeed)
 		
 	if progress_speed != null:
 		_play_progress(progress_speed)
@@ -80,7 +80,7 @@ func play_fade_in(speed = 1.0):
 	yield($FadePlayer, "animation_finished")
 	
 func play_fade_out(speed = 1.0):
-	$FadePlayer.play("fadeout2", -1, speed)
+	$FadePlayer.play("fadeout", -1, speed)
 	yield($FadePlayer, "animation_finished")
 
 func _play_progress(speed):
