@@ -66,7 +66,7 @@ func _on_gui_input(event):
 		# Also don't allow big differences in position
 		if (event.position - g_press_position).length() > MAX_POSITION_DIFF:
 			return
-			
+		
 		g_selected = not g_selected
 		_update_texture()
 		
@@ -90,10 +90,14 @@ func _update_texture():
 		self.texture = g_selected_texture
 		g_unlock_grid.set_selected_node(self)
 		g_which_unlock.update_settings(self.name)
+		# Need to set this again because calling
+		# unselect_currently_selected() might change it
+		g_selected = true
 	else:
 		self.texture = g_unselected_texture
 		g_unlock_grid.set_selected_node(null)
 		g_which_unlock.update_settings(null)
+		g_selected = false
 
 func get_is_selected():
 	return g_selected
