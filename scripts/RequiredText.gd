@@ -2,8 +2,7 @@ extends Label
 
 const UNLOCKED_TEXT = "unlocked"
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func _enter_tree():
 	var unlock_requirement_type = get_parent().get_parent().get_unlock_requirement_type()
 	
 	assert(UnlockRequirements.UnlockType.values().has(unlock_requirement_type))
