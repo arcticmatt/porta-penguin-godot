@@ -11,8 +11,6 @@ var g_saved_main_node_trump = null
 var g_saved_main_menu_node = null
 
 func change_scene_node(node, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0, long_fade = false):
-	MainMusicPlayer.stop_all()
-	
 	$FadePlayer.play("fade", -1, inspeed)
 	yield($FadePlayer, "animation_finished")
 
@@ -35,8 +33,6 @@ func change_scene_node(node, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0
 	return current_scene
 	
 func change_scene_path(path, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0, long_fade = false):
-	MainMusicPlayer.stop_all()
-	
 	$FadePlayer.play("fade", -1, inspeed)
 	yield($FadePlayer, "animation_finished")
 	
@@ -68,8 +64,11 @@ func play_fade_out(speed = 1.0):
 	yield($FadePlayer, "animation_finished")
 
 func _play_progress(speed):
-	thread.start(self, "_play_progress_threaded", speed)
-	thread.wait_to_finish()
+	if OS.get_name() == Constants.HTML5:
+		_play_progress_threaded(speed)
+	else:
+		thread.start(self, "_play_progress_threaded", speed)
+		thread.wait_to_finish()
 
 func _play_progress_threaded(speed):
 	$WhiteButton.visible = true

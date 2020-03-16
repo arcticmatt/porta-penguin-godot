@@ -55,9 +55,18 @@ func _ready():
 		var full_path = g_path + file
 		if not dir.file_exists(full_path):
 			full_path = file
-			
-		ResourceQueue.queue_resource(full_path)
-		g_resources_to_get.append(full_path)
+		
+		if OS.get_name() == Constants.HTML5:
+			var resource = load(full_path)
+			for _i in g_copies_of_each:
+				var object = resource.instance()
+				object.global_position = _get_random_global_position(object)
+				g_object_pool.append(object)
+				g_object_pool_available.append(object)
+				get_parent().call_deferred('add_child_below_node', self, object)
+		else:
+			ResourceQueue.queue_resource(full_path)
+			g_resources_to_get.append(full_path)
 	
 	g_max_available_objects = files.size() * g_copies_of_each
 

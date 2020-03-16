@@ -161,7 +161,6 @@ func _on_RestartLabel_gui_input(event):
 # This is for performance reasons, so we can avoid instancing Nodes, adding them
 # to the SceneTree, etc.
 func _reset():
-	MainMusicPlayer.stop_all()
 	yield(SceneTransition.play_fade_in(Constants.FADE_IN_RESTART), "completed")
 	g_reset = true
 	$ScoreLabel.reset()
@@ -191,8 +190,8 @@ func _reset():
 	g_per_round_trump_score = 0
 	
 	g_reset = false
-	yield(SceneTransition.play_fade_out(Constants.FADE_OUT_RESTART), "completed")
 	MainMusicPlayer.play()
+	yield(SceneTransition.play_fade_out(Constants.FADE_OUT_RESTART), "completed")
 		
 # Used to keep track of the Trump score per round, so we only have to write to the file at the
 # end.

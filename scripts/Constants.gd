@@ -22,3 +22,6 @@ const FADE_IN_WITH_PROGRESS = 0.75
 const FADE_OUT_WITH_PROGRESS = 0.35
 
 const PROGRESS_BAR = 1.35
+
+# OS names
+const HTML5 = "HTML5"
