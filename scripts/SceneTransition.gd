@@ -59,25 +59,6 @@ func change_scene_path(path, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0
 	
 	return current_scene
 	
-func change_scene_to(scene, path, inspeed = 1.0, outspeed = 1.0, progress_speed = 1.0, long_fade = false):
-	MainMusicPlayer.stop_all()
-	
-	$FadePlayer.play("fade", -1, inspeed)
-	yield($FadePlayer, "animation_finished")
-	get_tree().change_scene_to(scene)
-	
-	if long_fade:
-		$FadePlayer.play("fadeout_uneven", -1, outspeed)
-	else:
-		$FadePlayer.play("fadeout", -1, outspeed)
-		
-	if progress_speed != null:
-		_play_progress(progress_speed)
-		
-	yield($FadePlayer, "animation_finished")
-	
-	_play_song_path(path)
-	
 func play_fade_in(speed = 1.0):
 	$FadePlayer.play("fade", -1, speed)
 	yield($FadePlayer, "animation_finished")
