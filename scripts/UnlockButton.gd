@@ -25,7 +25,6 @@ var g_unlock_grid = null
 
 func _enter_tree():
 	g_unlock_grid = get_parent().get_parent()
-	self.connect("gui_input", self, "_on_gui_input")
 	
 	g_which_unlock = WhichUnlock.new(g_subfolder)
 	g_selected = g_which_unlock.get_selected(self.name)
@@ -45,6 +44,9 @@ func _enter_tree():
 	g_locked_texture = Utils.get_texture(locked_resource)
 	
 	_init_texture()
+
+func _ready():
+	self.connect("gui_input", self, "_on_gui_input")
 
 # Differentiate between tap and scroll
 func _on_gui_input(event):
