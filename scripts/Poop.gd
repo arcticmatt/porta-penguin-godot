@@ -6,6 +6,13 @@ const OFFSCREEN_POSITION = Vector2(-100, -100)
 # Offscreen it, otherwise it's weird
 var g_starting_position = OFFSCREEN_POSITION
 
+func _exit_tree():
+	deactivate()
+	
+func _process(delta):
+	if global_position.y > 900:
+		deactivate()
+
 func deactivate():
 	$BottomCollision.disabled = true
 	$MiddleCollision.disabled = true
@@ -32,7 +39,8 @@ func activate(starting_velocity, new_position, scale):
 	
 func _integrate_forces(state):
 	if g_starting_position:
-		state.transform = Transform2D(0, g_starting_position)
+		state.set_transform(Transform2D(0, g_starting_position))
+		state.set_angular_velocity(0.0)
 		g_starting_position = null
 
 func _on_Poop_body_entered(body):
