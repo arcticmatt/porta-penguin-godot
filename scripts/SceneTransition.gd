@@ -125,13 +125,22 @@ func _remove_current_scene():
 	return current_scene
 
 func get_saved_main_node():
-	return g_saved_main_node
+	# Safeguard against bug I can't repro
+	if g_saved_main_node and g_saved_main_node.get_name() == "Main":
+		return g_saved_main_node
+	return null
 	
 func get_saved_main_node_trump():
-	return g_saved_main_node_trump
+	# Safeguard against bug I can't repro
+	if g_saved_main_node_trump and g_saved_main_node_trump.get_name() == "Main":
+		return g_saved_main_node_trump
+	return null
 
 func get_saved_main_menu_node():
-	return g_saved_main_menu_node
+	# Safeguard against bug I can't repro
+	if g_saved_main_menu_node and g_saved_main_menu_node.get_name() == "MainMenu":
+		return g_saved_main_menu_node
+	return null
 	
 func save_main_node(node):
 	g_saved_main_node = node
