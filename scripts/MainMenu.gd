@@ -21,9 +21,23 @@ func _on_Play_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		Settings.disable_trump_mode()
 		if SceneTransition.get_saved_main_node():
-			SceneTransition.change_scene_node(SceneTransition.get_saved_main_node(), 1, .5, null)
+			SceneTransition.change_scene_node(
+				SceneTransition.get_saved_main_node(), 
+				Constants.FADE_IN_CACHED, 
+				Constants.FADE_OUT_CACHED, 
+				null
+			)
 		else:
-			var current = yield(SceneTransition.change_scene_path("res://scenes/Main.tscn", 1, .35, 1.5, true), "completed")
+			var current = yield(
+				SceneTransition.change_scene_path(
+					"res://scenes/Main.tscn", 
+					Constants.FADE_IN_WITH_PROGRESS, 
+					Constants.FADE_OUT_WITH_PROGRESS, 
+					Constants.PROGRESS_BAR, 
+					true
+				), 
+				"completed"
+			)
 			SceneTransition.save_main_menu_node(current)
 
 func _on_Unlocks_gui_input(event):
